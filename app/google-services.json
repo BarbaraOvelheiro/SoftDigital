@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "885537534195-179fbm5e1ghe2uuelnajl29fk7is3ms7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pt.ipg.a.softdigital",
+            "certificate_hash": "b49046ad85b127439e2b50186235c58fb805b830"
+          }
+        },
+        {
           "client_id": "885537534195-9hs9vjqo77kdda7u246fabrhka6kgh5q.apps.googleusercontent.com",
           "client_type": 3
         }
