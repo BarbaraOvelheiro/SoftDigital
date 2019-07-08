@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SoftDigital</string>
+
+    <string name="prompt_name">Primeiro e último nome</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha de acesso</string>
+    <string name="prompt_Confirmpassword">Confirmar senha de acesso</string>
+    <string name="error_doesntmach_password">A senha de acesso não coincide</string>
+    <string name="action_sign_in">Autenticar</string>
+    <string name="action_sign_register">Registar</string>
+    <string name="register_sucess">Utilizador registado com sucesso</string>
+    <string name="register_failed">Utilizador já está registado</string>
+    <string name="email_verification_sucess">Verificação da conta enviado para o email: </string>
+    <string name="email_verification_failed">Erro ao enviar a verificação da conta</string>
+    <string name="auth_failed">Falha na autenticação</string>
+    <string name="have_account">Já tem conta?</string>
+
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_invalid_password">Senha de acesso demasiado pequena</string>
+    <string name="error_incorrect_password">Senha de acesso incorreta</string>
+    <string name="error_field_required">Campo obrigatório</string>
+
+    <string name="fingerPrint_sucess">Impressão digital com sucesso</string>
+    <string name="fingerPrint_failed">Falha na impressão digital</string>
+    <string name="fingerPrint_notsupport">O seu dispositivo não suporta impressão digital</string>
+    <string name="fingerPrint_permissiondenied">Por favor ative a permissão da impressão digital</string>
+    <string name="fingerPrint_notconfigured">Não tem nenhuma impressão digital configurada. Por favor, configure nas Definições do seu dispositivo</string>
+
+    <string name="loading">A carregar…</string>
+</resources>
