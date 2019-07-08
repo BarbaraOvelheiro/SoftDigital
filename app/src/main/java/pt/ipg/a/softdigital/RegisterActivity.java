@@ -84,10 +84,23 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(RegisterActivity.this, getString(R.string.register_sucess), Toast.LENGTH_SHORT).show();
-                            sendEmailVerification();
-                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            String UserName = mUserNameView.getText().toString();
+                            String UserEmail = mEmailView.getText().toString();
+
+                           User information = new User(UserName, UserEmail);
+
+                           FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                   .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                               @Override
+                               public void onComplete(@NonNull Task<Void> task) {
+                                   // Sign in success, update UI with the signed-in user's information
+                                   Toast.makeText(RegisterActivity.this, getString(R.string.register_sucess), Toast.LENGTH_SHORT).show();
+                                   sendEmailVerification();
+                               }
+                           });
+
+                         //   FirebaseUser user = mAuth.getCurrentUser();
                           //  updateUI(user);
 
                         } else {
@@ -200,9 +213,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
-            user.setUserName(mUserNameView.getText().toString());
-
-            firebaseReference.child(user.getUserName()).setValue(user);
 
         }
         if(i == R.id.email_sign_in_button){
