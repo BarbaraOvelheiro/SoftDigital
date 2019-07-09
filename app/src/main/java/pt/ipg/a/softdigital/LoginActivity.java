@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this, "Entrar com sucesso", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(LoginActivity.this, FingerPrintAuth.class);
+                            Intent intent = new Intent(LoginActivity.this, FileUpload.class);
                             startActivity(intent);
                             finish();
 
