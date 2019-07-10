@@ -34,6 +34,7 @@
     <string name="upload_file_failed">Erro ao carregar o ficheiro</string>
     <string name="uploading_file">A carregar ficheiro...</string>
     <string name="selected_file">Ficheiro selecionado: </string>
+    <string name="pdf_file_name">Insira o nome do ficheiro</string>
 
     <string name="loading">A carregar…</string>
 </resources>

@@ -47,4 +47,33 @@
         android:text="@string/upload_file"
         android:background="@drawable/button_rounded"
         android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/view_pdf_files_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginBottom="100dp"
+        android:text="Ver ficheiros"
+        android:background="@drawable/button_rounded_trns"
+        android:textColor="@color/colorAccent"/>
+
+    <EditText
+        android:id="@+id/enter_pdf_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="308dp"
+        android:ems="10"
+        android:hint="@string/pdf_file_name"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/colorAccent" />
 </RelativeLayout>

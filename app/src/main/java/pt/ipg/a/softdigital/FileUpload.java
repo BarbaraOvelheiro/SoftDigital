@@ -31,9 +31,11 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
     private TextView notification;
 
+    EditText editPdfName;
+
     Uri pdfUri;
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(); // retorna um objeto do Firebase DataBase
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Files"); // retorna um objeto do Firebase DataBase
     StorageReference storageReference =  FirebaseStorage.getInstance().getReference("Files"); // retorna um objeto  do Firebase Storage
 
     ProgressDialog progressDialog;
@@ -46,7 +48,11 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         // Botões
         findViewById(R.id.select_file_button).setOnClickListener(this);
         findViewById(R.id.upload_button).setOnClickListener(this);
+        findViewById(R.id.view_pdf_files_button).setOnClickListener(this);
         notification = findViewById(R.id.notification);
+
+        editPdfName = (EditText) findViewById(R.id.enter_pdf_file_name);
+
     }
 
     @Override
@@ -68,6 +74,11 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
             }else {
                 Toast.makeText(FileUpload.this, R.string.select_file, Toast.LENGTH_SHORT).show();
             }
+        }
+        if( i == R.id.view_pdf_files_button){
+            Intent intent = new Intent(FileUpload.this, View_PDF_Files.class);
+            startActivity(new Intent(getApplicationContext(),View_PDF_Files.class));
+            finish();
         }
     }
 
@@ -111,21 +122,28 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         progressDialog.setProgress(0);
         progressDialog.show();
 
+        StorageReference reference = storageReference.child("Files"+System.currentTimeMillis()+".pdf");
 
-        StorageReference reference = storageReference.child("Files/"+System.currentTimeMillis()+".pdf");
         reference.putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+
                         while (!uri.isComplete());
                         Uri url = uri.getResult();
 
-                        UploadPdf uploadPdf = new UploadPdf(url.toString());
+                        UploadPdf information = new UploadPdf(editPdfName.getText().toString(),url.toString());
 
-                        databaseReference.child(databaseReference.push().getKey()).setValue(uploadPdf);
-                        Toast.makeText(FileUpload.this,R.string.upload_file_success, Toast.LENGTH_SHORT).show();
+                        FirebaseDatabase.getInstance().getReference("Files").child(databaseReference.push().getKey())
+                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(FileUpload.this,R.string.upload_file_success, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                         progressDialog.dismiss();
 
                     }
@@ -139,46 +157,5 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
             }
         });
-
-//        final String fileName = System.currentTimeMillis()+"";
-//
-//        StorageReference storageReference = storage.getReference(); // retorna root path
-//
-//        storageReference.child("Files").child(fileName).putFile(pdfUri)
-//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//
-//                        String url = StorageReference.getDownloadUrl(); // retorna o url do ficheiro enviado
-//                        DatabaseReference reference = database.getReference(); // retorna o root path
-//
-//                        reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//
-//                                if(task.isSuccessful()){
-//                                    Toast.makeText(FileUpload.this, R.string.upload_file_success, Toast.LENGTH_SHORT).show();
-//                                }else {
-//                                    Toast.makeText(FileUpload.this, R.string.upload_file_failed, Toast.LENGTH_SHORT).show();
-//                                }
-//
-//                            }
-//                        });
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//
-//                Toast.makeText(FileUpload.this, R.string.upload_file_failed, Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//
-//                int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount());
-//                progressDialog.setProgress(currentProgress);
-//            }
-//        });
     }
 }

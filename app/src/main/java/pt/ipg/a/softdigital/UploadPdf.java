@@ -2,21 +2,24 @@ package pt.ipg.a.softdigital;
 
 public class UploadPdf {
 
-    private String url;
+    public String name;
+    public String url;
 
-    public UploadPdf(){
+
+    public UploadPdf()  {
 
     }
 
-    public UploadPdf(String url) {
+    public UploadPdf(String name, String url) {
+        this.name = name;
         this.url = url;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }
