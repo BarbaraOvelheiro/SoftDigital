@@ -1,19 +1,13 @@
 package pt.ipg.a.softdigital;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,12 +37,12 @@ public class View_PDF_Files extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                UploadPdf UploadPdf = uploadPdfs.get(position);
+                UploadPdf uploadPdf = uploadPdfs.get(position);
 
-                Intent intent = new Intent();
-                intent.setType(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(UploadPdf.getUrl()));
+                Intent intent = new Intent(View_PDF_Files.this, Pdf_view.class);
+                intent.putExtra("pdfurl", uploadPdf.getUrl());
                 startActivity(intent);
+                finish();
 
             }
         });
