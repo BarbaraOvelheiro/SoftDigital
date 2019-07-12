@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class View_PDF_Files extends AppCompatActivity {
+public class View_PDF_Files extends AppCompatActivity implements View.OnClickListener {
 
     ListView pdf_List_View;
     DatabaseReference databaseReference;
@@ -30,6 +30,9 @@ public class View_PDF_Files extends AppCompatActivity {
 
         pdf_List_View = (ListView)findViewById(R.id.pdf_List_View);
         uploadPdfs = new ArrayList<>();
+
+        findViewById(R.id.button_back).setOnClickListener(this);
+
 
         viewAllFiles();
 
@@ -82,5 +85,17 @@ public class View_PDF_Files extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        int i = view.getId();
+
+        if(i == R.id.button_back){
+            Intent intent = new Intent(this, FileUpload.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

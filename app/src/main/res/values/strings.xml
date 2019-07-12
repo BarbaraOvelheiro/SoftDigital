@@ -26,15 +26,16 @@
     <string name="fingerPrint_permissiondenied">Por favor ative a permissão da impressão digital</string>
     <string name="fingerPrint_notconfigured">Não tem nenhuma impressão digital configurada. Por favor, configure nas Definições do seu dispositivo</string>
 
-    <string name="select_file">Selecione o ficheiro</string>
-    <string name="no_file_select">Nenhum ficheiro selecionado</string>
-    <string name="upload_file">Inserir ficheiro</string>
-    <string name="select_file_permissiondenied">Por favor ative a permissão para aceder aos ficheiros</string>
-    <string name="upload_file_success">Ficheiro carregado com sucesso</string>
-    <string name="upload_file_failed">Erro ao carregar o ficheiro</string>
-    <string name="uploading_file">A carregar ficheiro...</string>
-    <string name="selected_file">Ficheiro selecionado: </string>
-    <string name="pdf_file_name">Insira o nome do ficheiro</string>
+    <string name="select_file">Selecione o documento</string>
+    <string name="no_file_select">Nenhum documento selecionado</string>
+    <string name="upload_file">Inserir documento</string>
+    <string name="select_file_permissiondenied">Por favor ative a permissão para aceder aos documentos</string>
+    <string name="upload_file_success">Documento carregado com sucesso</string>
+    <string name="upload_file_failed">Erro ao carregar o documento</string>
+    <string name="uploading_file">A carregar documento...</string>
+    <string name="selected_file">Documento selecionado: </string>
+    <string name="pdf_file_name">Insira o nome do documento</string>
+    <string name="files">Documentos</string>
 
     <string name="loading">A carregar…</string>
 </resources>
