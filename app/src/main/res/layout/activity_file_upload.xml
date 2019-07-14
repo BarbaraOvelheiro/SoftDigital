@@ -77,16 +77,15 @@
         android:textAlignment="center"
         android:textColorHint="@color/colorAccent" />
 
-    <Button
-        android:id="@+id/button_back"
-        android:layout_width="52dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="55dp"
+        android:layout_height="52dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="341dp"
-        android:layout_marginBottom="35dp"
-        android:background="@mipmap/voltar" />
+        android:layout_marginEnd="338dp"
+        android:layout_marginBottom="27dp"
+        app:srcCompat="@mipmap/voltar"
+        android:backgroundTint="#00FFFFFF"/>
 
 </RelativeLayout>

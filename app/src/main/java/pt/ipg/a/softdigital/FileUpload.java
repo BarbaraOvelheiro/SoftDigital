@@ -49,7 +49,7 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.select_file_button).setOnClickListener(this);
         findViewById(R.id.upload_button).setOnClickListener(this);
         findViewById(R.id.view_pdf_files_button).setOnClickListener(this);
-        findViewById(R.id.button_back).setOnClickListener(this);
+        findViewById(R.id.back_button).setOnClickListener(this);
         notification = findViewById(R.id.notification);
 
         editPdfName = (EditText) findViewById(R.id.enter_pdf_file_name);
@@ -81,8 +81,8 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
             startActivity(new Intent(getApplicationContext(),View_PDF_Files.class));
             finish();
         }
-        if(i == R.id.button_back){
-            Intent intent = new Intent(this, LoginActivity.class);
+        if(i == R.id.back_button){
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         }

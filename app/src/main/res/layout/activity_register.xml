@@ -15,6 +15,28 @@
 
     <!-- Login progress -->
 
+    <ImageView
+        android:id="@+id/vertical_line_imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="246dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        app:srcCompat="@mipmap/logo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/vertical_line_imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="75dp"
+        app:srcCompat="@mipmap/softdigitalv2" />
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -22,12 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone"/>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="366dp"
-        android:layout_height="299dp"
-        app:srcCompat="@mipmap/logo" />
 
     <ScrollView
         android:id="@+id/login_form"

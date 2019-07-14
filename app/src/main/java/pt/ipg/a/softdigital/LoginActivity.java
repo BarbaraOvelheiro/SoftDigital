@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this, "Entrar com sucesso", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(LoginActivity.this, FileUpload.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
 
@@ -127,13 +127,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         hideProgressDialog();
         if (user != null) {
 
-            findViewById(R.id.email_login_form).setVisibility(View.VISIBLE);
-            findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
+         //   findViewById(R.id.email_login_form).setVisibility(View.VISIBLE);
+           // findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
 
         } else {
 
-            findViewById(R.id.email_login_form).setVisibility(View.VISIBLE);
-            findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
+            //findViewById(R.id.email_login_form).setVisibility(View.VISIBLE);
+            //findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
         }
     }
 

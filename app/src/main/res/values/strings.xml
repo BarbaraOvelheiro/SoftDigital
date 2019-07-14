@@ -36,6 +36,9 @@
     <string name="selected_file">Documento selecionado: </string>
     <string name="pdf_file_name">Insira o nome do documento</string>
     <string name="files">Documentos</string>
-
+    <string name="sign_and_send">Assinar e enviar</string>
+    <string name="settings">Definições</string>
+    <string name="waiting_for_signature">A aguardar assinatura</string>
+    <string name="for_signing">Por Assinar</string>
     <string name="loading">A carregar…</string>
 </resources>

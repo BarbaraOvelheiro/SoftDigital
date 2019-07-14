@@ -31,7 +31,7 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
         pdf_List_View = (ListView)findViewById(R.id.pdf_List_View);
         uploadPdfs = new ArrayList<>();
 
-        findViewById(R.id.button_back).setOnClickListener(this);
+        findViewById(R.id.back_button).setOnClickListener(this);
 
 
         viewAllFiles();
@@ -92,7 +92,7 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
 
         int i = view.getId();
 
-        if(i == R.id.button_back){
+        if(i == R.id.back_button){
             Intent intent = new Intent(this, FileUpload.class);
             startActivity(intent);
             finish();
