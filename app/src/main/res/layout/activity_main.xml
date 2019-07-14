@@ -1,9 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <View
+        android:id="@+id/background_view"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/status_for_signing_textView"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/background_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/waiting_for_signature_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status_waiting_for_signature_textView"
+        android:layout_alignBottom="@+id/background_view"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/waiting_for_signature"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/for_signing_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_below="@+id/status_for_signing_textView"
+        android:layout_alignBottom="@+id/background_view"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/for_signing"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/status_waiting_for_signature_textView"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/background_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="80dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="36sp" />
+
+    <ImageButton
+        android:id="@+id/add_file_button"
+        android:layout_width="wrap_content"
+        android:layout_height="85dp"
+        android:layout_below="@+id/background_view"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-56dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="461dp"
+        android:backgroundTint="#00FFFFFF"
+        app:srcCompat="@mipmap/add" />
+
+    <ImageView
+        android:id="@+id/sign_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/documents_imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@mipmap/assinatura" />
+
+    <Button
+        android:id="@+id/sign_and_send_button"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/documents_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_rounded_trns"
+        android:text="@string/sign_and_send"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="160dp"
+        android:background="@drawable/button_rounded_trns"
+        android:text="@string/settings"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/documents_button"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/settings_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/files"
+        android:textColor="#fff" />
+
+    <ImageView
+        android:id="@+id/documents_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/settings_imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@mipmap/documento" />
+
+    <ImageView
+        android:id="@+id/settings_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="160dp"
+        app:srcCompat="@mipmap/ferramentas" />
+
+    <ImageView
+        android:id="@+id/vertical_line_imageView"
+        android:layout_width="129dp"
+        android:layout_height="146dp"
+        android:layout_below="@+id/logo_imageView"
+        android:layout_alignBottom="@+id/background_view"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@mipmap/linha" />
+
+    <ImageView
+        android:id="@+id/logo_imageView"
+        android:layout_width="155dp"
+        android:layout_height="52dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginEnd="130dp"
+        app:srcCompat="@mipmap/softdigitalbranco" />
+
+</RelativeLayout>
