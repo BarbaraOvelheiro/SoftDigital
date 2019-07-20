@@ -22,14 +22,13 @@ import com.google.firebase.auth.UserInfo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.add_file_button).setOnClickListener(this);
+        findViewById(R.id.documents_button).setOnClickListener(this);
     }
 
     @Override
@@ -39,7 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(i == R.id.add_file_button){
             Intent intent = new Intent(this, FileUpload.class);
             startActivity(intent);
-            finish();
+        }
+
+        if(i == R.id.documents_button){
+            Intent intent = new Intent(this, View_PDF_Files.class);
+            startActivity(intent);
         }
 
 

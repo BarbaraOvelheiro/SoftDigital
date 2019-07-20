@@ -8,6 +8,7 @@
     <string name="error_doesntmach_password">A senha de acesso não coincide</string>
     <string name="action_sign_in">Autenticar</string>
     <string name="action_sign_register">Registar</string>
+    <string name="action_sign_register_user">Registar utilizador</string>
     <string name="register_sucess">Utilizador registado com sucesso</string>
     <string name="register_failed">Utilizador já está registado</string>
     <string name="email_verification_sucess">Verificação da conta enviado para o email: </string>

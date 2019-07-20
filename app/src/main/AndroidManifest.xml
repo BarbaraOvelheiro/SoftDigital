@@ -16,14 +16,13 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pdf_view"></activity>
-        <activity android:name=".View_PDF_Files" />
-        <activity android:name=".FileUpload" />
+        <activity android:name=".Pdf_view"/>
+        <activity android:name=".View_PDF_Files"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".FingerPrintAuth" />
         <activity
-
             android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
@@ -32,6 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".FileUpload"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

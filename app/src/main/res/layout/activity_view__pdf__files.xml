@@ -15,15 +15,4 @@
 
     </ListView>
 
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="69dp"
-        android:layout_height="73dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="322dp"
-        android:layout_marginBottom="0dp"
-        android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@mipmap/voltar" />
-
 </RelativeLayout>

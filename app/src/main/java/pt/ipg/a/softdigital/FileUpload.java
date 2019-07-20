@@ -45,11 +45,14 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_upload);
 
+        getSupportActionBar().setTitle(R.string.upload_file);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Botões
         findViewById(R.id.select_file_button).setOnClickListener(this);
         findViewById(R.id.upload_button).setOnClickListener(this);
-        findViewById(R.id.view_pdf_files_button).setOnClickListener(this);
-        findViewById(R.id.back_button).setOnClickListener(this);
+       // findViewById(R.id.view_pdf_files_button).setOnClickListener(this);
+
         notification = findViewById(R.id.notification);
 
         editPdfName = (EditText) findViewById(R.id.enter_pdf_file_name);
@@ -72,20 +75,16 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         if (i == R.id.upload_button){
             if(pdfUri != null ){ // o utilizador selecionou o ficheiro
                 uploadFile(pdfUri);
+                Intent intent = new Intent(this, View_PDF_Files.class);
+                startActivity(intent);
             }else {
                 Toast.makeText(FileUpload.this, R.string.select_file, Toast.LENGTH_SHORT).show();
             }
         }
-        if( i == R.id.view_pdf_files_button){
-            Intent intent = new Intent(FileUpload.this, View_PDF_Files.class);
-            startActivity(new Intent(getApplicationContext(),View_PDF_Files.class));
-            finish();
-        }
-        if(i == R.id.back_button){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+//        if( i == R.id.view_pdf_files_button){
+//            Intent intent = new Intent(FileUpload.this, View_PDF_Files.class);
+//            startActivity(new Intent(getApplicationContext(),View_PDF_Files.class));
+//        }
     }
 
     @Override

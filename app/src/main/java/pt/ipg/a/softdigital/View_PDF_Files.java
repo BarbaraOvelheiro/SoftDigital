@@ -28,11 +28,11 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__pdf__files);
 
+        getSupportActionBar().setTitle(R.string.files);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         pdf_List_View = (ListView)findViewById(R.id.pdf_List_View);
         uploadPdfs = new ArrayList<>();
-
-        findViewById(R.id.back_button).setOnClickListener(this);
-
 
         viewAllFiles();
 
@@ -90,12 +90,6 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
 
-        int i = view.getId();
 
-        if(i == R.id.back_button){
-            Intent intent = new Intent(this, FileUpload.class);
-            startActivity(intent);
-            finish();
-        }
     }
 }
