@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(i == R.id.documents_button){
-            Intent intent = new Intent(this, View_PDF_Files.class);
+            Intent intent = new Intent(this, StatusDocumentsActivity.class);
             startActivity(intent);
         }
 
