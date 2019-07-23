@@ -47,4 +47,7 @@
     <string name="necessary_sign">É necessário assinar</string>
     <string name="waiting_for_others_signatures">A aguardar por outros</string>
     <string name="done">Concluído</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

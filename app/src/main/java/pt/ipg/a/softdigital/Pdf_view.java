@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+
 import com.github.barteksc.pdfviewer.PDFView;
 
 import java.io.BufferedInputStream;
@@ -28,6 +29,8 @@ public class Pdf_view extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         mPDFView = (PDFView) findViewById(R.id.pdfView);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Vizualização");
 
         String pdfURL = getIntent().getStringExtra("pdfurl");
         try {
@@ -58,4 +61,5 @@ public class Pdf_view extends AppCompatActivity {
             mPDFView.fromStream(inputStream).load();
         }
     }
+
 }

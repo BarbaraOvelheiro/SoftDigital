@@ -19,7 +19,9 @@
         <activity
             android:name=".StatusDocumentsActivity"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".Pdf_view" />
+        <activity
+            android:name=".Pdf_view"
+            android:parentActivityName=".View_PDF_Files"/>
         <activity
             android:name=".View_PDF_Files"
             android:parentActivityName=".MainActivity" />

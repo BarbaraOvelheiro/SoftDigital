@@ -19,8 +19,8 @@ import java.util.List;
 
 public class View_PDF_Files extends AppCompatActivity implements View.OnClickListener {
 
-    ListView pdf_List_View;
-    DatabaseReference databaseReference;
+    ListView pdf_List_View; //ok
+    DatabaseReference databaseReference; //ok
     List<UploadPdf> uploadPdfs;
 
     @Override
@@ -45,7 +45,6 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
                 Intent intent = new Intent(View_PDF_Files.this, Pdf_view.class);
                 intent.putExtra("pdfurl", uploadPdf.getUrl());
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -54,8 +53,8 @@ public class View_PDF_Files extends AppCompatActivity implements View.OnClickLis
 
     private void viewAllFiles() {
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Files");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Files"); // ok
+        databaseReference.addValueEventListener(new ValueEventListener() { //ok
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
