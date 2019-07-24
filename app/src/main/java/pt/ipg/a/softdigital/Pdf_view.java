@@ -32,7 +32,6 @@ public class Pdf_view extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         mPDFView = (PDFView) findViewById(R.id.pdfView);
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.sign);
 

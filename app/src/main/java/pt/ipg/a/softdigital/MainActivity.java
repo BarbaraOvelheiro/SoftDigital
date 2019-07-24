@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,8 +20,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView status_waiting_for_signature_textView;
+
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.add_file_button).setOnClickListener(this);
         findViewById(R.id.documents_button).setOnClickListener(this);
+
+        status_waiting_for_signature_textView = (TextView) findViewById(R.id.status_waiting_for_signature_textView);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Files");
+
+        databaseReference.addValueEventListener(new ValueEventListener() { // Conta os documentos inseridos que estão por assinar
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int sum = 0;
+
+                if(dataSnapshot.exists()) {
+
+                    sum = (int) dataSnapshot.getChildrenCount();
+
+                    status_waiting_for_signature_textView.setText(String.valueOf(sum));
+
+                }else{
+
+                    status_waiting_for_signature_textView.setText("0");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     @Override
