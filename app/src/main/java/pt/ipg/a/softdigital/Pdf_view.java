@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -29,8 +32,9 @@ public class Pdf_view extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         mPDFView = (PDFView) findViewById(R.id.pdfView);
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Vizualização");
+        getSupportActionBar().setTitle(R.string.sign);
 
         String pdfURL = getIntent().getStringExtra("pdfurl");
         try {
@@ -62,4 +66,30 @@ public class Pdf_view extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.sign_menu_icon){
+
+        }
+        if(item.getItemId() == R.id.share_menu_icon){
+
+        }
+        if(item.getItemId() == R.id.add_signature_field_menu_icon){
+
+        }
+
+        return true;
+    }
 }

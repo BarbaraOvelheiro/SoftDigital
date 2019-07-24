@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sign_menu_icon"
+        android:icon="@mipmap/assinarbranco"
+        app:showAsAction="ifRoom"
+        android:title="@string/sign">
+
+    </item>
+
+    <item
+        android:id="@+id/add_signature_field_menu_icon"
+        android:icon="@mipmap/adicionarutilizadorbranco"
+        app:showAsAction="ifRoom"
+        android:title="@string/add_signature_field">
+
+    </item>
+
+
+    <item android:icon="@mipmap/partilhar"
+    android:id="@+id/share_menu_icon"
+    app:showAsAction="ifRoom"
+        android:title="@string/send_to_receiver">
+    </item>
+
+</menu>
