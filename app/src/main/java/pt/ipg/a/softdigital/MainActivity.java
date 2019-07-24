@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView status_waiting_for_signature_textView;
+    private TextView status_for_signing_textView;
 
     private DatabaseReference databaseReference;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.add_file_button).setOnClickListener(this);
         findViewById(R.id.documents_button).setOnClickListener(this);
 
-        status_waiting_for_signature_textView = (TextView) findViewById(R.id.status_waiting_for_signature_textView);
+        status_for_signing_textView = (TextView) findViewById(R.id.status_for_signing_textView);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Files");
 
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     sum = (int) dataSnapshot.getChildrenCount();
 
-                    status_waiting_for_signature_textView.setText(String.valueOf(sum));
+                    status_for_signing_textView.setText(String.valueOf(sum));
 
                 }else{
 
-                    status_waiting_for_signature_textView.setText("0");
+                    status_for_signing_textView.setText("0");
 
                 }
             }
