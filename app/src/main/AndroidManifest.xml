@@ -16,12 +16,13 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SeeContacts"></activity>
         <activity
             android:name=".StatusDocumentsActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Pdf_view"
-            android:parentActivityName=".View_PDF_Files"/>
+            android:parentActivityName=".View_PDF_Files" />
         <activity
             android:name=".View_PDF_Files"
             android:parentActivityName=".MainActivity" />

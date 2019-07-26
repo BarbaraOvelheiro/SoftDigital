@@ -1,6 +1,7 @@
 package pt.ipg.a.softdigital;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import android.support.v7.app.AppCompatActivity;
@@ -83,6 +84,9 @@ public class Pdf_view extends AppCompatActivity {
 
         }
         if(item.getItemId() == R.id.share_menu_icon){
+
+            Intent intent = new Intent(this, SeeContacts.class);
+            startActivity(intent);
 
         }
         if(item.getItemId() == R.id.add_signature_field_menu_icon){
