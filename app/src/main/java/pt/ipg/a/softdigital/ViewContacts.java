@@ -22,6 +22,7 @@ public class ViewContacts extends AppCompatActivity {
     private RecyclerView SeeContactsRecyclerList;
     private DatabaseReference UsersContacts;
     private String pdfURL;
+    private String receiverPdfID;
 
 
     @Override
@@ -38,8 +39,10 @@ public class ViewContacts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pdfURL = getIntent().getExtras().get("pdfurl").toString();
-
         Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
+
+        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
+        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -71,6 +74,7 @@ public class ViewContacts extends AppCompatActivity {
                                 Intent intent = new Intent(ViewContacts.this, SendToReceiver.class);
                                 intent.putExtra("click_user_id", click_user_id);
                                 intent.putExtra("pdfurl", pdfURL);
+                                intent.putExtra("receiverPdfID", receiverPdfID);
                                 startActivity(intent);
 
 

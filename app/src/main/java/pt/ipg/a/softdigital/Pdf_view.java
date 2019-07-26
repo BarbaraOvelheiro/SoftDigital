@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -26,6 +27,7 @@ public class Pdf_view extends AppCompatActivity {
 
     PDFView mPDFView;
     private String pdfURL;
+    private String receiverPdfID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,9 @@ public class Pdf_view extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.sign);
+
+        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
+        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
 
       //  String pdfURL = getIntent().getStringExtra("pdfurl");
         pdfURL = getIntent().getExtras().get("pdfurl").toString();
@@ -90,6 +95,7 @@ public class Pdf_view extends AppCompatActivity {
 
             Intent intent = new Intent(this, ViewContacts.class);
             intent.putExtra("pdfurl", pdfURL);
+            intent.putExtra("receiverPdfID", receiverPdfID);
             startActivity(intent);
 
         }
