@@ -28,6 +28,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_email" />
 
+            <TextView
+                android:id="@+id/contact_userRegime_editView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_regime" />
+
         </LinearLayout>
 
     </LinearLayout>

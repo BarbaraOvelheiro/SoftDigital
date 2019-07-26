@@ -3,6 +3,7 @@
 
     <string name="prompt_name">Primeiro e último nome</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_regime">Regime em que se encontra</string>
     <string name="prompt_password">Senha de acesso</string>
     <string name="prompt_Confirmpassword">Confirmar senha de acesso</string>
     <string name="error_doesntmach_password">A senha de acesso não coincide</string>

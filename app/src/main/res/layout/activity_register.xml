@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/vertical_line_imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="246dp"
+        android:layout_width="202dp"
+        android:layout_height="208dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="75dp"
@@ -86,6 +86,18 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/UserRegime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_regime"
+                    android:textColorHint="@color/colorAccent" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -121,18 +133,18 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/email_create_account_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_rounded"
-                android:text="@string/action_sign_register"
-                android:textColor="#fff"
-                android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/email_create_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/action_sign_register"
+        android:textColor="#fff"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/haveCont"

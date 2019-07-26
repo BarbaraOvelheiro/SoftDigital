@@ -4,15 +4,17 @@ public class User {
 
     private String UserName; // Nome do utilizador
     private String UserEmail; // Email do utilizador
+    private String UserRegime; // Regime em que se encontra o utilizador
 
 
     public User() {
 
     }
 
-    public User(String userName, String userEmail) {
+    public User(String userName, String userEmail, String userRegime) {
         UserName = userName;
         UserEmail = userEmail;
+        UserRegime = userRegime;
     }
 
 
@@ -32,4 +34,11 @@ public class User {
         UserEmail = userEmail;
     }
 
+    public String getUserRegime() {
+        return UserRegime;
+    }
+
+    public void setUserRegime(String userRegime) {
+        UserRegime = userRegime;
+    }
 }

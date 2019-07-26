@@ -26,6 +26,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     // UI references
     private EditText mUserNameView;
     private EditText mEmailView;
+    private EditText mRegimeView;
     private EditText mPasswordView;
     private EditText mConfirmPassworView;
 //    private View mProgressView;
@@ -45,6 +46,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 //        mProgressView = findViewById(R.id.login_progress);
         mUserNameView = findViewById(R.id.UserName);
         mEmailView = findViewById(R.id.email);
+        mRegimeView = findViewById(R.id.UserRegime);
         mPasswordView = findViewById(R.id.password);
         mConfirmPassworView = findViewById(R.id.ConfirmPassword);
 
@@ -89,8 +91,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                             String UserName = mUserNameView.getText().toString();
                             String UserEmail = mEmailView.getText().toString();
+                            String UserRegime = mRegimeView.getText().toString();
 
-                           User information = new User(UserName, UserEmail);
+                           User information = new User(UserName, UserEmail, UserRegime);
 
                            FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                    .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -159,6 +162,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             valid = false;
         } else {
             mEmailView.setError(null);
+        }
+
+        String UserRegime = mRegimeView.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mRegimeView.setError(getString(R.string.error_field_required));
+            valid = false;
+        } else {
+            mRegimeView.setError(null);
         }
 
         String password = mPasswordView.getText().toString();

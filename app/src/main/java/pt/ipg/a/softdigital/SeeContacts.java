@@ -53,6 +53,8 @@ public class SeeContacts extends AppCompatActivity {
 
                         holder.contact_username_editText.setText(model.getUserName());
                         holder.contact_userEmail_editText.setText(model.getUserEmail());
+                        holder.contact_userRegime_editText.setText(model.getUserRegime());
+
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -88,7 +90,7 @@ public class SeeContacts extends AppCompatActivity {
 
     public static class SeeContactsViewHolder extends RecyclerView.ViewHolder{
 
-        TextView contact_username_editText, contact_userEmail_editText;
+        TextView contact_username_editText, contact_userEmail_editText, contact_userRegime_editText;
 
         public SeeContactsViewHolder(@NonNull View itemView){
 
@@ -96,6 +98,7 @@ public class SeeContacts extends AppCompatActivity {
 
             contact_username_editText = itemView.findViewById(R.id.contact_username_editText);
             contact_userEmail_editText = itemView.findViewById(R.id.contact_userEmail_editText);
+            contact_userRegime_editText = itemView.findViewById(R.id.contact_userRegime_editView);
 
         }
 
