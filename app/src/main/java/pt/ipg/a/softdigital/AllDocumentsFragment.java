@@ -80,7 +80,6 @@ public class AllDocumentsFragment extends Fragment {
                                // String click_document_id = getRef(position).getKey();
                                 String url = model.getUrl();
 
-
                                 Intent intent = new Intent(getActivity(), Pdf_view.class);
                                 intent.putExtra("pdfurl",url);
                                 startActivity(intent);

@@ -91,6 +91,7 @@ public class Pdf_view extends AppCompatActivity {
         if(item.getItemId() == R.id.share_menu_icon){
 
             Intent intent = new Intent(this, SeeContacts.class);
+            intent.putExtra("pdfurl", pdfURL);
             startActivity(intent);
 
         }

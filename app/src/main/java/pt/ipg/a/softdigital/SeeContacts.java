@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -21,6 +22,8 @@ public class SeeContacts extends AppCompatActivity {
 
     private RecyclerView SeeContactsRecyclerList;
     private DatabaseReference UsersContacts;
+    private String pdfURL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public class SeeContacts extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Contactos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        pdfURL = getIntent().getExtras().get("pdfurl").toString();
+
+        Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -64,6 +71,7 @@ public class SeeContacts extends AppCompatActivity {
 
                                 Intent intent = new Intent(SeeContacts.this, SendToReceiver.class);
                                 intent.putExtra("click_user_id", click_user_id);
+                                intent.putExtra("pdfurl", pdfURL);
                                 startActivity(intent);
 
 
