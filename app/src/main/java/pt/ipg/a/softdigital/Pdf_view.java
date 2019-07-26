@@ -6,10 +6,8 @@ import android.os.AsyncTask;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -90,7 +88,7 @@ public class Pdf_view extends AppCompatActivity {
         }
         if(item.getItemId() == R.id.share_menu_icon){
 
-            Intent intent = new Intent(this, SeeContacts.class);
+            Intent intent = new Intent(this, ViewContacts.class);
             intent.putExtra("pdfurl", pdfURL);
             startActivity(intent);
 

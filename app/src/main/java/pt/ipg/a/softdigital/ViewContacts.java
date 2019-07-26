@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SeeContacts extends AppCompatActivity {
+public class ViewContacts extends AppCompatActivity {
 
     private RecyclerView SeeContactsRecyclerList;
     private DatabaseReference UsersContacts;
@@ -69,7 +68,7 @@ public class SeeContacts extends AppCompatActivity {
 
                                 String click_user_id = getRef(position).getKey();
 
-                                Intent intent = new Intent(SeeContacts.this, SendToReceiver.class);
+                                Intent intent = new Intent(ViewContacts.this, SendToReceiver.class);
                                 intent.putExtra("click_user_id", click_user_id);
                                 intent.putExtra("pdfurl", pdfURL);
                                 startActivity(intent);

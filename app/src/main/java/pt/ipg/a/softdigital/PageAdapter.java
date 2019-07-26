@@ -20,13 +20,11 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return new AllDocumentsFragment();
             case 1:
-                return new AllDocumentsFragment();
+                return new NeedToSignDocumentosFragment();
             case 2:
-                return new AllDocumentsFragment();
+                return new RequestsDocumentsFragment();
             case 3:
-                return new AllDocumentsFragment();
-            case 4:
-                return new AllDocumentsFragment();
+                return new DoneFragment();
             default:
                 return null;
         }

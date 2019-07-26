@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SendToReceiver"
-            android:parentActivityName=".SeeContacts">
+            android:parentActivityName=".ViewContacts">
         </activity>
-        <activity android:name=".SeeContacts"
+        <activity android:name=".ViewContacts"
             android:parentActivityName=".StatusDocumentsActivity">
         </activity>
         <activity
