@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -26,6 +27,7 @@ import java.net.URL;
 public class Pdf_view extends AppCompatActivity {
 
     PDFView mPDFView;
+    private String pdfURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,9 @@ public class Pdf_view extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.sign);
 
-        String pdfURL = getIntent().getStringExtra("pdfurl");
+      //  String pdfURL = getIntent().getStringExtra("pdfurl");
+        pdfURL = getIntent().getExtras().get("pdfurl").toString();
+
         try {
             URL url = new URL(pdfURL);
             new RetrievePDF().execute(pdfURL);
@@ -79,6 +83,7 @@ public class Pdf_view extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+
 
         if(item.getItemId() == R.id.sign_menu_icon){
 

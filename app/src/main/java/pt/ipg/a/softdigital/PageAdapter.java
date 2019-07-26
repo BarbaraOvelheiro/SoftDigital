@@ -18,15 +18,15 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-            //    return ;
+                return new AllDocumentsFragment();
             case 1:
-
+                return new AllDocumentsFragment();
             case 2:
-
+                return new AllDocumentsFragment();
             case 3:
-             ;
+                return new AllDocumentsFragment();
             case 4:
-
+                return new AllDocumentsFragment();
             default:
                 return null;
         }

@@ -17,13 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SendToReceiver"></activity>
-        <activity android:name=".SeeContacts" />
+        <activity android:name=".SeeContacts"
+            android:parentActivityName=".StatusDocumentsActivity">
+        </activity>
         <activity
             android:name=".StatusDocumentsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Pdf_view"
-            android:parentActivityName=".View_PDF_Files" />
+            android:parentActivityName=".StatusDocumentsActivity" >
+        </activity>
         <activity
             android:name=".View_PDF_Files"
             android:parentActivityName=".MainActivity" />

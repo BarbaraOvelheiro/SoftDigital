@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.add_file_button).setOnClickListener(this);
         findViewById(R.id.documents_button).setOnClickListener(this);
+        findViewById(R.id.sign_and_send_button2).setOnClickListener(this);
 
         status_for_signing_textView = (TextView) findViewById(R.id.status_for_signing_textView);
 
@@ -81,8 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
+        if (i == R.id.sign_and_send_button2){
+            Intent intent = new Intent(this, StatusDocumentsActivity.class);
+            startActivity(intent);
+        }
+
         if(i == R.id.documents_button){
-            Intent intent = new Intent(this, View_PDF_Files.class);
+            Intent intent = new Intent(this, StatusDocumentsActivity.class);
             startActivity(intent);
         }
 

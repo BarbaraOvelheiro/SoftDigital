@@ -43,6 +43,7 @@
     <string name="waiting_for_signature">A aguardar por outros</string>
     <string name="for_signing">Por Assinar</string>
     <string name="loading">A carregar…</string>
+    <string name="file_name">Nome</string>
 
     <string name="all_documents">Todos os documentos</string>
     <string name="necessary_sign">É necessário assinar</string>

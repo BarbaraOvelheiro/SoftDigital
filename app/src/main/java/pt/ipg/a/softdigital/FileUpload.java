@@ -75,7 +75,7 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         if (i == R.id.upload_button){
             if(pdfUri != null ){ // o utilizador selecionou o ficheiro
                 uploadFile(pdfUri);
-                Intent intent = new Intent(this, View_PDF_Files.class);
+                Intent intent = new Intent(this, StatusDocumentsActivity.class);
                 startActivity(intent);
             }else {
                 Toast.makeText(FileUpload.this, R.string.select_file, Toast.LENGTH_SHORT).show();
