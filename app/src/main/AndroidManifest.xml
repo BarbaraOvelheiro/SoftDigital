@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SeeContacts"></activity>
+        <activity android:name=".SendToReceiver"></activity>
+        <activity android:name=".SeeContacts" />
         <activity
             android:name=".StatusDocumentsActivity"
             android:parentActivityName=".MainActivity" />

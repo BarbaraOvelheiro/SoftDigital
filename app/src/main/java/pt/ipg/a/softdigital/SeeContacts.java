@@ -1,5 +1,6 @@
 package pt.ipg.a.softdigital;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,10 +49,24 @@ public class SeeContacts extends AppCompatActivity {
         FirebaseRecyclerAdapter<User, SeeContactsViewHolder> adapter =
                 new FirebaseRecyclerAdapter<User, SeeContactsViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull SeeContactsViewHolder holder, int position, @NonNull User model) {
+                    protected void onBindViewHolder(@NonNull SeeContactsViewHolder holder, final int position, @NonNull User model) {
 
                         holder.contact_username_editText.setText(model.getUserName());
                         holder.contact_userEmail_editText.setText(model.getUserEmail());
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String click_user_id = getRef(position).getKey();
+
+                                Intent intent = new Intent(SeeContacts.this, SendToReceiver.class);
+                                intent.putExtra("click_user_id", click_user_id);
+                                startActivity(intent);
+
+
+                            }
+                        });
 
                     }
 
