@@ -28,7 +28,7 @@ public class ViewContacts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_contacts);
+        setContentView(R.layout.activity_view_contacts);
 
         UsersContacts = FirebaseDatabase.getInstance().getReference().child("User");
 
@@ -108,7 +108,7 @@ public class ViewContacts extends AppCompatActivity {
             super(itemView);
 
             contact_username_editText = itemView.findViewById(R.id.contact_username_editText);
-            contact_userEmail_editText = itemView.findViewById(R.id.contact_userEmail_editText);
+            contact_userEmail_editText = itemView.findViewById(R.id.send_userName_editText);
             contact_userRegime_editText = itemView.findViewById(R.id.contact_userRegime_editView);
 
         }
