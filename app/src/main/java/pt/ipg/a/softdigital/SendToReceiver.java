@@ -131,10 +131,15 @@ public class SendToReceiver extends AppCompatActivity  {
 
                     String request_type = dataSnapshot.child(receiverUserID).child("request_type").getValue().toString();
 
-                    if(request_type.equals("send")){
+                    if(dataSnapshot.hasChild(receiverPdfID)) {
 
-                        Current_State = "request_send";
-                        //send_pdf_to_receiver_button.setText("Enviado");
+                        String request_pdf_id = dataSnapshot.child(receiverPdfID).child("request_pdf_id").getValue().toString();
+
+                        if (request_type.equals("send") && request_pdf_id.equals("send")) {
+
+                            Current_State = "request_send";
+                            //send_pdf_to_receiver_button.setText("Enviado");
+                        }
                     }
 
                 }
@@ -205,30 +210,48 @@ public class SendToReceiver extends AppCompatActivity  {
     private void SendDocumentsRequest(){
 
         DocumentRequestRef.child(senderUserID).child(receiverUserID)
-            .child("request_type").setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
+            .child("request_type").setValue("send").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                if(task.isSuccessful()){
+                DocumentRequestRef.child(senderUserID).child(receiverUserID).child(receiverPdfID)
+                        .child("request_pdf_id").setValue("send").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
-                    DocumentRequestRef.child(receiverUserID).child(senderUserID)
-                            .child("request_type").setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
 
-                            if (task.isSuccessful()){
+                            DocumentRequestRef.child(receiverUserID).child(senderUserID)
+                                    .child("request_type").setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                send_pdf_to_receiver_button.setEnabled(true);
-                                Current_State = "request_send";
-                                send_pdf_to_receiver_button.setText("Enviado");
+                                    if (task.isSuccessful()){
 
-                            }
+                                        DocumentRequestRef.child(receiverUserID).child(senderUserID).child(receiverPdfID)
+                                                .child("request_pdf_id").setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
+                                                if (task.isSuccessful()){
+
+                                                    send_pdf_to_receiver_button.setEnabled(true);
+                                                    Current_State = "request_send";
+                                                    send_pdf_to_receiver_button.setText("Enviado");
+
+                                                }
+                                            }
+                                        });
+
+
+                                    }
+
+                                }
+                            });
                         }
-                    });
+                    }
 
-                }
-
+                });
             }
         });
 
@@ -236,28 +259,20 @@ public class SendToReceiver extends AppCompatActivity  {
 
     private void ReceivedDocumentRequest(){
 
-        ContactsRef.child(senderUserID).child(receiverUserID)
-                .child("Contacts").setValue("received")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+        ContactsRef.child(senderUserID).child(receiverUserID).child("Contacts").setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
                         if(task.isSuccessful()){
-                            ContactsRef.child(receiverUserID).child(senderUserID)
-                                    .child("Contacts").setValue("received")
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            ContactsRef.child(receiverUserID).child(senderUserID).child("Contacts").setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
                                             if(task.isSuccessful()){
-                                                DocumentRequestRef.child(senderUserID).child(receiverUserID)
-                                                        .removeValue()
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                DocumentRequestRef.child(senderUserID).child(receiverUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
-                                                                DocumentRequestRef.child(receiverUserID).child(senderUserID)
-                                                                        .removeValue()
-                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                DocumentRequestRef.child(receiverUserID).child(senderUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<Void> task) {
 
