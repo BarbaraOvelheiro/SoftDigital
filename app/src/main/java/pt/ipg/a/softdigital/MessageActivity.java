@@ -120,6 +120,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     private void SendMessage(){
 
+        String messageDocumentName = document_name_editText.getText().toString();
+
         String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
         String messaReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderRef;
 
@@ -128,6 +130,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         String messagePushID = userMessageKeyRef.getKey();
 
         Map messageText = new HashMap();
+        messageText.put("message", messageDocumentName);
+        messageText.put("pdf", pdfURL);
         messageText.put("type", "text");
         messageText.put("from", messageSenderID);
 
