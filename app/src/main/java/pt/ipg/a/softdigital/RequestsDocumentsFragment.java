@@ -31,7 +31,7 @@ public class RequestsDocumentsFragment extends Fragment {
 
     private RecyclerView documents_request_list;
 
-    private DatabaseReference DocumentRequestRef, UserRef;
+    private DatabaseReference DocumentRequestRef, UserRef, currentPdfID;
     private FirebaseAuth mAuth;
     private String currentUserID;
 
@@ -52,6 +52,7 @@ public class RequestsDocumentsFragment extends Fragment {
 
         DocumentRequestRef = FirebaseDatabase.getInstance().getReference().child("Document Request");
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+        currentPdfID = FirebaseDatabase.getInstance().getReference().child("Document Request").child(currentUserID);
 
         documents_request_list = (RecyclerView) RequestsDocumentsFragmentView.findViewById(R.id.documents_request_list);
         documents_request_list.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -100,6 +101,53 @@ public class RequestsDocumentsFragment extends Fragment {
                                                     final String requestUserName = dataSnapshot.child("userName").getValue().toString();
 
                                                     holder.send_userName_editText.setText(requestUserName);
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        DatabaseReference getPdfIdRef = getRef(position).child("request_pdf_id").getRef();
+
+                        getPdfIdRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                if (dataSnapshot.exists()){
+
+                                    String type = dataSnapshot.getValue().toString();
+
+                                    if(type.equals("received")){
+
+                                        DocumentRequestRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                if(dataSnapshot.hasChild("name")){
+
+                                                    final String requestDocName = dataSnapshot.child("name").getValue().toString();
+
+                                                    holder.document_receive_name_editText.setText(requestDocName);
+                                                }else{
+                                                    final String requestDocName = dataSnapshot.child("name").getValue().toString();
+
+                                                    holder.document_receive_name_editText.setText(requestDocName);
                                                 }
 
                                             }

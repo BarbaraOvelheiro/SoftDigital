@@ -16,19 +16,23 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SendToReceiver"
-            android:parentActivityName=".ViewContacts">
-        </activity>
-        <activity android:name=".ViewContacts"
-            android:parentActivityName=".StatusDocumentsActivity">
-        </activity>
+        <activity android:name=".RequestsContactsActivity"
+            android:parentActivityName=".ViewContacts"></activity>
+        <activity
+            android:name=".FindContactsActivity"
+            android:parentActivityName=".ViewContacts" />
+        <activity
+            android:name=".SendToReceiver"
+            android:parentActivityName=".ViewContacts" />
+        <activity
+            android:name=".ViewContacts"
+            android:parentActivityName=".StatusDocumentsActivity" />
         <activity
             android:name=".StatusDocumentsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Pdf_view"
-            android:parentActivityName=".StatusDocumentsActivity" >
-        </activity>
+            android:parentActivityName=".StatusDocumentsActivity" />
         <activity
             android:name=".View_PDF_Files"
             android:parentActivityName=".MainActivity" />

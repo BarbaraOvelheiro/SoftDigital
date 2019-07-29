@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="69dp"
-            android:layout_height="match_parent"
+            android:layout_width="67dp"
+            android:layout_height="72dp"
             app:srcCompat="@mipmap/icon_user" />
 
         <LinearLayout
@@ -43,6 +43,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_regime"
                 android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/request_accept_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@android:color/holo_green_light"
+                    android:text="@string/request_accept"
+                    android:visibility="invisible"/>
+            </LinearLayout>
 
         </LinearLayout>
 

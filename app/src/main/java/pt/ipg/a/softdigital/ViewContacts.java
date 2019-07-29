@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,15 +16,21 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ViewContacts extends AppCompatActivity {
 
-    private RecyclerView SeeContactsRecyclerList;
-    private DatabaseReference UsersContacts;
-    private String pdfURL;
-    private String receiverPdfID;
+    private RecyclerView ContactsList;
+    private DatabaseReference ContactsRef, UserRef;
+    private FirebaseAuth mAuth;
+    private String currentUserID;
+//    private String pdfURL;
+//    private String receiverPdfID;
 
 
     @Override
@@ -30,19 +38,23 @@ public class ViewContacts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_contacts);
 
-        UsersContacts = FirebaseDatabase.getInstance().getReference().child("User");
-
-        SeeContactsRecyclerList = (RecyclerView) findViewById(R.id.see__contacts_recycler_list);
-        SeeContactsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
+        ContactsList = (RecyclerView) findViewById(R.id.contacts_list);
+        ContactsList.setLayoutManager(new LinearLayoutManager(this));
 
         getSupportActionBar().setTitle("Contactos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        pdfURL = getIntent().getExtras().get("pdfurl").toString();
-        Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID =mAuth.getCurrentUser().getUid();
 
-        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
-        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
+        ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
+        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+
+//        pdfURL = getIntent().getExtras().get("pdfurl").toString();
+//        Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
+//
+//        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
+//        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -50,33 +62,43 @@ public class ViewContacts extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<User> options =
-                new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(UsersContacts, User.class)
-                .build();
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<User>().setQuery(ContactsRef, User.class).build();
 
-        FirebaseRecyclerAdapter<User, SeeContactsViewHolder> adapter =
-                new FirebaseRecyclerAdapter<User, SeeContactsViewHolder>(options) {
+        FirebaseRecyclerAdapter<User, ContactsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<User, ContactsViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull SeeContactsViewHolder holder, final int position, @NonNull User model) {
+                    protected void onBindViewHolder(@NonNull final ContactsViewHolder holder, final int position, @NonNull User model) {
 
-                        holder.contact_username_editText.setText(model.getUserName());
-                        holder.contact_userEmail_editText.setText(model.getUserEmail());
-                        holder.contact_userRegime_editText.setText(model.getUserRegime());
+                        String userIDs = getRef(position).getKey();
 
-
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        UserRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onClick(View view) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                String click_user_id = getRef(position).getKey();
+                                if(dataSnapshot.hasChild("userName")){
 
-                                Intent intent = new Intent(ViewContacts.this, SendToReceiver.class);
-                                intent.putExtra("click_user_id", click_user_id);
-                                intent.putExtra("pdfurl", pdfURL);
-                                intent.putExtra("receiverPdfID", receiverPdfID);
-                                startActivity(intent);
+                                    String username = dataSnapshot.child("userName").getValue().toString();
+                                    String useremail = dataSnapshot.child("userEmail").getValue().toString();
+                                    String userRegime = dataSnapshot.child("userRegime").getValue().toString();
 
+                                    holder.contact_username_editText.setText(username);
+                                    holder.contact_userEmail_editText.setText(useremail);
+                                    holder.contact_userRegime_editText.setText(userRegime);
+
+                                }else{
+                                    String username = dataSnapshot.child("userName").getValue().toString();
+                                    String useremail = dataSnapshot.child("userEmail").getValue().toString();
+                                    String userRegime = dataSnapshot.child("userRegime").getValue().toString();
+
+                                    holder.contact_username_editText.setText(username);
+                                    holder.contact_userEmail_editText.setText(useremail);
+                                    holder.contact_userRegime_editText.setText(userRegime);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
                         });
@@ -85,25 +107,25 @@ public class ViewContacts extends AppCompatActivity {
 
                     @NonNull
                     @Override
-                    public SeeContactsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                    public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
                         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
-                        SeeContactsViewHolder viewHolder = new SeeContactsViewHolder(view);
+                        ContactsViewHolder viewHolder = new ContactsViewHolder(view);
                         return viewHolder;
 
                     }
                 };
 
-        SeeContactsRecyclerList.setAdapter(adapter);
+        ContactsList.setAdapter(adapter);
         adapter.startListening();
 
     }
 
-    public static class SeeContactsViewHolder extends RecyclerView.ViewHolder{
+    public static class ContactsViewHolder extends RecyclerView.ViewHolder{
 
         TextView contact_username_editText, contact_userEmail_editText, contact_userRegime_editText;
 
-        public SeeContactsViewHolder(@NonNull View itemView){
+        public ContactsViewHolder(@NonNull View itemView){
 
             super(itemView);
 
@@ -113,5 +135,36 @@ public class ViewContacts extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.find_contacts_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.add_contacts_menu){
+
+            Intent intent = new Intent(this, FindContactsActivity.class);
+            startActivity(intent);
+
+        }
+        if(item.getItemId() == R.id.contacts_requests_menu){
+
+            Intent intent = new Intent(this, RequestsContactsActivity.class);
+            startActivity(intent);
+
+        }
+
+
+        return true;
     }
 }
