@@ -53,6 +53,8 @@
     <string name="send_to_receiver">Enviar para destinatário</string>
     <string name="sign">Assinar documento</string>
     <string name="add_signature_field">Adicionar campo para assinatura</string>
+    <string name="sucessful_send_message">Mensagem enviada com sucesso</string>
+    <string name="error_send_message">Erro ao enviar a mensagem. Tente novamente mais tarde.</string>
 
     <string name="add_contacts">Adicionar contacto</string>
     <string name="add_contact_send_message">Pedido Enviado</string>

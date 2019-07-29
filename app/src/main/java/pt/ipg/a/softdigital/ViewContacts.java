@@ -29,8 +29,8 @@ public class ViewContacts extends AppCompatActivity {
     private DatabaseReference ContactsRef, UserRef;
     private FirebaseAuth mAuth;
     private String currentUserID;
-//    private String pdfURL;
-//    private String receiverPdfID;
+    private String pdfURL;
+    private String receiverPdfID;
 
 
     @Override
@@ -50,11 +50,11 @@ public class ViewContacts extends AppCompatActivity {
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
 
-//        pdfURL = getIntent().getExtras().get("pdfurl").toString();
-//        Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
-//
-//        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
-//        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
+        pdfURL = getIntent().getExtras().get("pdfurl").toString();
+        Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
+
+        receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
+        Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -69,7 +69,7 @@ public class ViewContacts extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull final ContactsViewHolder holder, final int position, @NonNull User model) {
 
-                        String userIDs = getRef(position).getKey();
+                        final String userIDs = getRef(position).getKey();
 
                         UserRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -94,6 +94,19 @@ public class ViewContacts extends AppCompatActivity {
                                     holder.contact_userEmail_editText.setText(useremail);
                                     holder.contact_userRegime_editText.setText(userRegime);
                                 }
+
+                                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        Intent intent = new Intent(ViewContacts.this, MessageActivity.class);
+                                        intent.putExtra("userIDs", userIDs);
+                                        intent.putExtra("pdfurl", pdfURL);
+                                        intent.putExtra("receiverPdfID", receiverPdfID);
+                                        startActivity(intent);
+
+                                    }
+                                });
 
                             }
 
