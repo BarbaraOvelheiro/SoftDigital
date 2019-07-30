@@ -45,7 +45,7 @@ public class ViewContacts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUserID =mAuth.getCurrentUser().getUid();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");

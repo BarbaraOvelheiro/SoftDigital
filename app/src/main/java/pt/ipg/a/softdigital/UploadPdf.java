@@ -5,7 +5,6 @@ public class UploadPdf {
     public String name;
     public String url;
 
-
     public UploadPdf()  {
 
     }

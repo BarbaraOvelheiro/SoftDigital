@@ -1,9 +1,12 @@
 package pt.ipg.a.softdigital;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,7 +39,6 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView contact_username_editText, document_name_editText;
     private Button send_pdf_to_receiver_button;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +68,14 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         contact_username_editText = (TextView) findViewById(R.id.contact_username_editText);
         document_name_editText = (TextView) findViewById(R.id.document_name_editText);
 
-       send_pdf_to_receiver_button = (Button) findViewById(R.id.send_pdf_to_receiver_button);
-       send_pdf_to_receiver_button.setOnClickListener(this);
+        send_pdf_to_receiver_button = (Button) findViewById(R.id.send_pdf_to_receiver_button);
+        send_pdf_to_receiver_button.setOnClickListener(this);
 
         RetrieveUserInfo();
         RetrievePdfInfo();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
 
     }
 
@@ -122,22 +129,27 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         String messageDocumentName = document_name_editText.getText().toString();
 
-        String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
-        String messaReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderRef;
+//        String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
+//        String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
+        String messageSenderRef = "Messages" ;
+        String messageReceiverRef = "Messages" ;
 
-        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).child(messaReceiverRef).push();
+//        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).child(messageReceiverRef).push();
+
+        DatabaseReference userMessageKeyRef = RootRef.child("Messages").push();
 
         String messagePushID = userMessageKeyRef.getKey();
 
         Map messageText = new HashMap();
         messageText.put("message", messageDocumentName);
-        messageText.put("pdf", pdfURL);
+        messageText.put("pdfurl", pdfURL);
         messageText.put("type", "text");
         messageText.put("from", messageSenderID);
+        messageText.put("to", messageReceiverID);
 
         Map messageDetails = new HashMap();
         messageDetails.put(messageSenderRef + "/" + messagePushID, messageText);
-        messageDetails.put(messaReceiverRef + "/" + messagePushID, messageText);
+        messageDetails.put(messageReceiverRef + "/" + messagePushID, messageText);
 
         RootRef.updateChildren(messageDetails).addOnCompleteListener(new OnCompleteListener() {
             @Override
