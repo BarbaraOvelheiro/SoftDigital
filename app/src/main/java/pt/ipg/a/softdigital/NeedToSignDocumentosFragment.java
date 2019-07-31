@@ -1,13 +1,20 @@
 package pt.ipg.a.softdigital;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.style.TabStopSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +50,11 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
     private String currentUserID;
 
+    private static final String CHANNEL_ID = "doc_notification";
+    private static final String CHANNEL_NAME = "Doc Notification";
+    private static final String CHANNEL_DESC = "Doc Sign Notification";
+
+
     public NeedToSignDocumentosFragment() {
         // Required empty public constructor
     }
@@ -62,6 +74,16 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
         MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(CHANNEL_DESC);
+
+            NotificationManager manager = getActivity().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
+        }
 
         return NeedToSignDocuments;
 
@@ -104,6 +126,7 @@ public class NeedToSignDocumentosFragment extends Fragment {
                     holder.linearLayoutView.setVisibility(View.INVISIBLE);
                 }else {
                     holder.linearLayoutView.setVisibility(View.VISIBLE);
+                    displayNotification();
                 }
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -157,5 +180,22 @@ public class NeedToSignDocumentosFragment extends Fragment {
             send_userName_editText = itemView.findViewById(R.id.send_userName_editText);
             linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
         }
+    }
+
+    private void displayNotification(){
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
+                .setSmallIcon(R.mipmap.assinatura)
+                .setContentTitle("Novo Documento")
+                .setContentText("Recebeu um documento para assinatura")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
+        notificationManagerCompat.notify(1, mBuilder.build());
+
+
+
     }
 }
