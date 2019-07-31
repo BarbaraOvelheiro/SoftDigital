@@ -2,19 +2,19 @@ package pt.ipg.a.softdigital;
 
 public class Messages {
 
-    private String message, pdfurl, type, from, receiver;
+    private String message, pdfurl, type, from, to;
 
     public Messages(){
 
     }
 
 
-    public Messages(String message, String pdfurl, String type, String from, String receiver) {
+    public Messages(String message, String pdfurl, String type, String from, String to) {
         this.message = message;
         this.pdfurl = pdfurl;
         this.type = type;
         this.from = from;
-        this.receiver = receiver;
+        this.to = to;
     }
 
     public String getMessage() {
@@ -33,12 +33,12 @@ public class Messages {
         this.pdfurl = pdfurl;
     }
 
-    public String getReceiver() {
-        return receiver;
+    public String getTo() {
+        return to;
     }
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
+    public void setTo(String receiver) {
+        this.to = to;
     }
 
     public String getType() {

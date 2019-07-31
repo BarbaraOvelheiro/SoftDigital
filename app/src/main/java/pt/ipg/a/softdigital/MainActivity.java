@@ -28,9 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView status_for_signing_textView;
+    private TextView status_for_signing_textView, status_waiting_for_signature_textView;
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, MessagesRef;
+    FirebaseAuth mAuth;
+    private String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.sign_and_send_button2).setOnClickListener(this);
 
         status_for_signing_textView = (TextView) findViewById(R.id.status_for_signing_textView);
+        status_waiting_for_signature_textView = (TextView) findViewById(R.id.status_waiting_for_signature_textView);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Files");
 
@@ -60,6 +63,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
 
                     status_for_signing_textView.setText("0");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+
+        MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
+
+        MessagesRef.addValueEventListener(new ValueEventListener() { // Conta os documentos inseridos que estão por assinar
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int sum = 0;
+
+                if(dataSnapshot.exists()) {
+
+                    sum = (int) dataSnapshot.getChildrenCount();
+
+                    status_waiting_for_signature_textView.setText(String.valueOf(sum));
+
+                }else{
+
+                    status_waiting_for_signature_textView.setText("0");
 
                 }
             }

@@ -43,18 +43,18 @@
                 <TextView
                     android:id="@+id/fromtextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/send_to"
                     android:textColor="@color/colorAccent"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/send_userName_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/prompt_name"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 

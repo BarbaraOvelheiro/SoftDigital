@@ -50,6 +50,7 @@
     <string name="necessary_sign">É necessário assinar</string>
     <string name="waiting_for_others_signatures">A aguardar por outros</string>
     <string name="done">Concluído</string>
+    <string name="waiting_signature_from">Aguarda assinatura de: </string>
 
     <string name="send_to_receiver">Enviar para destinatário</string>
     <string name="sign">Assinar documento</string>
