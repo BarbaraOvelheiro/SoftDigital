@@ -22,7 +22,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return new NeedToSignDocumentosFragment();
             case 2:
-                return new RequestsDocumentsFragment();
+                return new WaitForOthersDocumentsFragment();
             case 3:
                 return new DoneFragment();
             default:

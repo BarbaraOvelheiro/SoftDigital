@@ -131,12 +131,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
 //        String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
 //        String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
-        String messageSenderRef = "Messages" ;
-        String messageReceiverRef = "Messages" ;
+        String messageSenderRef = "Messages/" + messageSenderID ;
+        String messageReceiverRef = "Messages/" + messageReceiverID ;
 
 //        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).child(messageReceiverRef).push();
 
-        DatabaseReference userMessageKeyRef = RootRef.child("Messages").push();
+        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).push();
 
         String messagePushID = userMessageKeyRef.getKey();
 

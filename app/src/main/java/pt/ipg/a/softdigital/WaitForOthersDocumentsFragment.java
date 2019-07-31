@@ -1,14 +1,11 @@
 package pt.ipg.a.softdigital;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,26 +21,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NeedToSignDocumentosFragment extends Fragment {
+public class WaitForOthersDocumentsFragment extends Fragment {
 
-    private static final String TAG = "NeedToSignDocumentosFragment";
 
-    private View NeedToSignDocuments;
+    private View WaitForOthersDocuments;
 
-    private RecyclerView receiver_documents_list;
+    private RecyclerView wait_for_others_documents_list;
 
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef, MessagesRef;
 
     private String currentUserID;
 
-    public NeedToSignDocumentosFragment() {
+    public WaitForOthersDocumentsFragment() {
         // Required empty public constructor
     }
 
@@ -52,10 +46,10 @@ public class NeedToSignDocumentosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        NeedToSignDocuments =  inflater.inflate(R.layout.fragment_need_to_sign_documentos, container, false);
+        WaitForOthersDocuments = inflater.inflate(R.layout.fragment_wait_for_others_documents, container, false);
 
-        receiver_documents_list = (RecyclerView) NeedToSignDocuments.findViewById(R.id.receiver_documents_list);
-        receiver_documents_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        wait_for_others_documents_list = (RecyclerView) WaitForOthersDocuments.findViewById(R.id.wait_for_others_documents_list);
+        wait_for_others_documents_list.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -63,9 +57,9 @@ public class NeedToSignDocumentosFragment extends Fragment {
         MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
 
-        return NeedToSignDocuments;
-
+        return WaitForOthersDocuments;
     }
+
 
     @Override
     public void onStart() {
@@ -73,10 +67,10 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Messages>().setQuery(MessagesRef, Messages.class).build();
 
-        FirebaseRecyclerAdapter<Messages, NeedToSignDocumentsFragmentViewHolder> adapter
-                = new FirebaseRecyclerAdapter<Messages, NeedToSignDocumentsFragmentViewHolder>(options) {
+        FirebaseRecyclerAdapter<Messages, WaitForOthersDocumentsViewHolder> adapter
+                = new FirebaseRecyclerAdapter<Messages, WaitForOthersDocumentsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final NeedToSignDocumentsFragmentViewHolder holder, final int position, @NonNull final Messages model) {
+            protected void onBindViewHolder(@NonNull final WaitForOthersDocumentsViewHolder holder, final int position, @NonNull final Messages model) {
 
                 String fromUserID = model.getFrom();
 
@@ -101,9 +95,9 @@ public class NeedToSignDocumentosFragment extends Fragment {
                 });
 
                 if(fromUserID.equals(currentUserID)) {
-                    holder.linearLayoutView.setVisibility(View.INVISIBLE);
-                }else {
                     holder.linearLayoutView.setVisibility(View.VISIBLE);
+                }else {
+                    holder.linearLayoutView.setVisibility(View.INVISIBLE);
                 }
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -129,10 +123,10 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
             @NonNull
             @Override
-            public NeedToSignDocumentsFragmentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public WaitForOthersDocumentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.documents_receiver_layout, viewGroup, false);
-                NeedToSignDocumentsFragmentViewHolder viewHolder = new NeedToSignDocumentsFragmentViewHolder(view);
+                WaitForOthersDocumentsViewHolder viewHolder = new WaitForOthersDocumentsViewHolder(view);
 
                 mAuth = FirebaseAuth.getInstance();
 
@@ -141,16 +135,16 @@ public class NeedToSignDocumentosFragment extends Fragment {
             }
         };
 
-        receiver_documents_list.setAdapter(adapter);
+        wait_for_others_documents_list.setAdapter(adapter);
         adapter.startListening();
     }
 
-    public static class NeedToSignDocumentsFragmentViewHolder extends RecyclerView.ViewHolder{
+    public static class WaitForOthersDocumentsViewHolder extends RecyclerView.ViewHolder{
 
         TextView document_receive_name_editText, send_userName_editText;
         LinearLayout linearLayoutView;
 
-        public NeedToSignDocumentsFragmentViewHolder(@NonNull View itemView) {
+        public WaitForOthersDocumentsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             document_receive_name_editText = itemView.findViewById(R.id.document_receive_name_editText);
@@ -158,4 +152,5 @@ public class NeedToSignDocumentosFragment extends Fragment {
             linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
         }
     }
+
 }

@@ -2,18 +2,24 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp">
 
     <LinearLayout
+        android:id="@+id/linearLayoutView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="69dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignStart="@+id/linearLayoutView"
             android:background="@mipmap/pdf_file" />
 
         <LinearLayout
@@ -23,28 +29,33 @@
 
             <TextView
                 android:id="@+id/document_receive_name_editText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/file_name"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="De:"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/send_userName_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/prompt_name"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/fromtextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_to"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp" />
 
+                <TextView
+                    android:id="@+id/send_userName_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/prompt_name"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

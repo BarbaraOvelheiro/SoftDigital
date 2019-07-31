@@ -40,6 +40,8 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
     ProgressDialog progressDialog;
 
+    private String current_state;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
