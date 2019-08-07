@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,9 +39,11 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Files"); // retorna um objeto do Firebase DataBase
     StorageReference storageReference =  FirebaseStorage.getInstance().getReference("Files"); // retorna um objeto  do Firebase Storage
 
+    FirebaseAuth mAuth;
+    private String currentUserID;
+
     ProgressDialog progressDialog;
 
-    private String current_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,9 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         notification = findViewById(R.id.notification);
 
         editPdfName = (EditText) findViewById(R.id.enter_pdf_file_name);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
     }
 
@@ -141,9 +147,11 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                         while (!uri.isComplete());
                         Uri url = uri.getResult();
 
-                        UploadPdf information = new UploadPdf(editPdfName.getText().toString(),url.toString());
+                        String messageSenderRef ="Files/" + currentUserID;
 
-                        FirebaseDatabase.getInstance().getReference("Files").child(databaseReference.push().getKey())
+                        UploadPdf information = new UploadPdf(editPdfName.getText().toString(),url.toString(), currentUserID);
+
+                        FirebaseDatabase.getInstance().getReference().child(messageSenderRef).child(databaseReference.push().getKey())
                                 .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

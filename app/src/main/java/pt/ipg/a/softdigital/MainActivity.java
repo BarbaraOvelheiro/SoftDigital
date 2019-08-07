@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         status_for_signing_textView = (TextView) findViewById(R.id.status_for_signing_textView);
         status_waiting_for_signature_textView = (TextView) findViewById(R.id.status_waiting_for_signature_textView);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Files");
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Files").child(currentUserID);
 
         databaseReference.addValueEventListener(new ValueEventListener() { // Conta os documentos inseridos que estão por assinar
             @Override
@@ -72,9 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-        mAuth = FirebaseAuth.getInstance();
-        currentUserID = mAuth.getCurrentUser().getUid();
 
         MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
 

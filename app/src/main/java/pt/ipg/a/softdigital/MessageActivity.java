@@ -1,8 +1,14 @@
 package pt.ipg.a.softdigital;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +46,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     private TextView contact_username_editText, document_name_editText;
     private Button send_pdf_to_receiver_button;
 
+    private String current_state;
+    private DatabaseReference DocumentsRequestRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +71,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         messageSenderID = mAuth.getCurrentUser().getUid();
 
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
-        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files");
+        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files").child(messageSenderID);
 
         RootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -76,6 +86,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
+
+        current_state = "new";
+
+        DocumentsRequestRef = FirebaseDatabase.getInstance().getReference().child("Documents Request");
 
     }
 
@@ -140,12 +154,17 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         String messagePushID = userMessageKeyRef.getKey();
 
+        if(current_state.equals("new")){
+            current_state = "pendent";
+        }
+
         Map messageText = new HashMap();
         messageText.put("message", messageDocumentName);
         messageText.put("pdfurl", pdfURL);
         messageText.put("type", "text");
         messageText.put("from", messageSenderID);
         messageText.put("to", messageReceiverID);
+        messageText.put("current_state", current_state);
 
         Map messageDetails = new HashMap();
         messageDetails.put(messageSenderRef + "/" + messagePushID, messageText);
@@ -175,6 +194,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         if(i == R.id.send_pdf_to_receiver_button){
             SendMessage();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
+
+
 }

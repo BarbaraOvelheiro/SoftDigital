@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,9 @@ public class AllDocumentsFragment extends Fragment {
     private RecyclerView AllDocumentsList;
 
     private DatabaseReference AllDocumentsRef;
+
+    FirebaseAuth mAuth;
+    private String currentUserID;
 
 
     public AllDocumentsFragment() {
@@ -49,6 +53,9 @@ public class AllDocumentsFragment extends Fragment {
 
         AllDocumentsRef = FirebaseDatabase.getInstance().getReference().child("Files");
 
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+
         return AllDocumentsView;
 
     }
@@ -59,7 +66,7 @@ public class AllDocumentsFragment extends Fragment {
 
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<UploadPdf>()
-                .setQuery(AllDocumentsRef, UploadPdf.class)
+                .setQuery(AllDocumentsRef.child(currentUserID), UploadPdf.class)
                 .build();
 
         FirebaseRecyclerAdapter<UploadPdf, AllDocumentsViewHolder> adapter
