@@ -65,6 +65,14 @@
     <string name="request_accept">Aceitar</string>
     <string name="sucessful_add_contact">Contacto adicionado com sucesso</string>
 
+    <string name="sign_here">Assine aqui:</string>
+    <string name="save">Guardar</string>
+    <string name="clear">Limpar</string>
+    <string name="undo">Desfazer</string>
+    <string name="redo">Refazer</string>
+    <string name="nothing_to_undo">Nada para desfazer</string>
+    <string name="nothing_to_redo">Nada para refazer</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

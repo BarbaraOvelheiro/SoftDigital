@@ -163,7 +163,6 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
             }
         };
-
         receiver_documents_list.setAdapter(adapter);
         adapter.startListening();
     }
@@ -181,7 +180,6 @@ public class NeedToSignDocumentosFragment extends Fragment {
             linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
         }
     }
-
     private void displayNotification(){
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
