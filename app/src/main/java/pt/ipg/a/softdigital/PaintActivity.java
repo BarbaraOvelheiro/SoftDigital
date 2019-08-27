@@ -29,6 +29,9 @@ public class PaintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
 
+        getSupportActionBar().setTitle(R.string.add_signature);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         paintView = findViewById(R.id.paintView);
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
