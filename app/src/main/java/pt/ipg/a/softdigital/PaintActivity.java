@@ -2,7 +2,9 @@ package pt.ipg.a.softdigital;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -125,7 +127,7 @@ public class PaintActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(PaintActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestStoragePermission();
             }
-           // paintView.saveImage();
+            paintView.saveImage();
         }
 
         return true;

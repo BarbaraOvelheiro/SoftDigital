@@ -66,6 +66,7 @@
     <string name="sucessful_add_contact">Contacto adicionado com sucesso</string>
 
     <string name="add_signature">Adicionar assinatura</string>
+    <string name="no_add_signature">Sem assinatura</string>
     <string name="sign_here">Assine aqui:</string>
     <string name="save">Guardar</string>
     <string name="clear">Limpar</string>

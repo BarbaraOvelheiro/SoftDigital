@@ -2,14 +2,17 @@ package pt.ipg.a.softdigital;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -21,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PaintView extends View {
+
+    private static final String TAG = "PaintView";
 
     public static int BRUSH_SIZE = 10;
     public static final int DEFAULT_COLOR = Color.BLACK;
@@ -205,61 +210,62 @@ public class PaintView extends View {
         currentColor = color;
 
     }
-//
-//    @SuppressLint("WrongThread")
-//    public void saveImage () {
-//
-//        int count = 0;
-//
-//        File sdDirectory = Environment.getExternalStorageDirectory();
-//        File subDirectory = new File(sdDirectory.toString() + "/Pictures/Paint");
-//
-//        if (subDirectory.exists()) {
-//
-//            File[] existing = subDirectory.listFiles();
-//
-//            for (File file : existing) {
-//
-//                if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png")) {
-//
-//                    count++;
-//
-//                }
-//
-//            }
-//
-//        } else {
-//
-//            subDirectory.mkdir();
-//
-//        }
-//
-//        if (subDirectory.exists()) {
-//
-//            File image = new File(subDirectory, "/drawing_" + (count + 1) + ".png");
-//            FileOutputStream fileOutputStream;
-//
-//            try {
-//
-//                fileOutputStream = new FileOutputStream(image);
-//
-//                mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-//
-//                fileOutputStream.flush();
-//                fileOutputStream.close();
-//
-//                Toast.makeText(getContext(), "guardado", Toast.LENGTH_LONG).show();
-//
-//            } catch (FileNotFoundException e) {
-//
-//
-//            } catch (IOException e) {
-//
-//
-//            }
-//
-//        }
-//
-//    }
+
+    @SuppressLint("WrongThread")
+    public void saveImage () {
+
+        int count = 0;
+
+        File sdDirectory = Environment.getExternalStorageDirectory();
+        File subDirectory = new File(sdDirectory.toString() + "/Pictures/Paint");
+
+        if (subDirectory.exists()) {
+
+            File[] existing = subDirectory.listFiles();
+
+            for (File file : existing) {
+
+                if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png")) {
+
+                    count++;
+
+                }
+
+            }
+
+        } else {
+
+            subDirectory.mkdir();
+
+        }
+
+        if (subDirectory.exists()) {
+
+            File image = new File(subDirectory, "/drawing_" + (count + 1) + ".png");
+            FileOutputStream fileOutputStream;
+
+            try {
+
+                fileOutputStream = new FileOutputStream(image);
+
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+
+                fileOutputStream.flush();
+                fileOutputStream.close();
+
+                Toast.makeText(getContext(), "guardado", Toast.LENGTH_LONG).show();
+                Log.v(TAG, "a merda que saiiiiii aqui caralho: " + image);
+
+            } catch (FileNotFoundException e) {
+
+
+            } catch (IOException e) {
+
+
+            }
+
+        }
+
+    }
 
 }
