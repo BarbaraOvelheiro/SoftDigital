@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 
 public class FileUpload extends AppCompatActivity implements View.OnClickListener{
 
@@ -82,9 +85,16 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         }
         if (i == R.id.upload_button){
             if(pdfUri != null ){ // o utilizador selecionou o ficheiro
-                uploadFile(pdfUri);
-                Intent intent = new Intent(this, StatusDocumentsActivity.class);
-                startActivity(intent);
+                String NamePDF = editPdfName.getText().toString();
+                if(TextUtils.isEmpty(NamePDF)){
+                    editPdfName.setError(getString(R.string.error_field_required));
+                    Toast.makeText(FileUpload.this, R.string.please_insert_pdf_file_name, Toast.LENGTH_SHORT).show();
+                }else{
+                    editPdfName.setError(null);
+                    uploadFile(pdfUri);
+                    Intent intent = new Intent(this, StatusDocumentsActivity.class);
+                    startActivity(intent);
+                }
             }else {
                 Toast.makeText(FileUpload.this, R.string.select_file, Toast.LENGTH_SHORT).show();
             }

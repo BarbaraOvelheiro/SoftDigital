@@ -89,6 +89,8 @@ public class Pdf_view extends AppCompatActivity {
 
 
         if(item.getItemId() == R.id.sign_menu_icon){
+            Intent intent = new Intent(this, DigitalSignature.class);
+            startActivity(intent);
 
         }
         if(item.getItemId() == R.id.share_menu_icon){
@@ -100,7 +102,8 @@ public class Pdf_view extends AppCompatActivity {
 
         }
         if(item.getItemId() == R.id.add_signature_field_menu_icon){
-
+            Intent intent = new Intent(this, PaintActivity.class);
+            startActivity(intent);
         }
 
         return true;

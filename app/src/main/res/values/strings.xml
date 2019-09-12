@@ -29,6 +29,7 @@
     <string name="fingerPrint_notconfigured">Não tem nenhuma impressão digital configurada. Por favor, configure nas Definições do seu dispositivo</string>
 
     <string name="select_file">Selecione o documento</string>
+    <string name="click_select_file">Clique para selecionar o documento</string>
     <string name="no_file_select">Nenhum documento selecionado</string>
     <string name="upload_file">Inserir documento</string>
     <string name="select_file_permissiondenied">Por favor ative a permissão para aceder aos documentos</string>
@@ -37,6 +38,7 @@
     <string name="uploading_file">A carregar documento...</string>
     <string name="selected_file">Documento selecionado: </string>
     <string name="pdf_file_name">Insira o nome do documento</string>
+    <string name="please_insert_pdf_file_name">Por favor, insira o nome do documento</string>
     <string name="files">Documentos</string>
     <string name="sign_and_send">Assinar e enviar</string>
     <string name="settings">Definições</string>
