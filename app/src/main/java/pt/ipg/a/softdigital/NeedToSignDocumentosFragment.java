@@ -50,10 +50,6 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
     private String currentUserID;
 
-    private static final String CHANNEL_ID = "doc_notification";
-    private static final String CHANNEL_NAME = "Doc Notification";
-    private static final String CHANNEL_DESC = "Doc Sign Notification";
-
 
     public NeedToSignDocumentosFragment() {
         // Required empty public constructor
@@ -75,16 +71,6 @@ public class NeedToSignDocumentosFragment extends Fragment {
         MessagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(CHANNEL_DESC);
-
-            NotificationManager manager = getActivity().getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-
-        }
-
         return NeedToSignDocuments;
 
     }
@@ -93,7 +79,9 @@ public class NeedToSignDocumentosFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Messages>().setQuery(MessagesRef, Messages.class).build();
+        /************/
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Messages>()
+                .setQuery(MessagesRef, Messages.class).build();
 
         FirebaseRecyclerAdapter<Messages, NeedToSignDocumentsFragmentViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Messages, NeedToSignDocumentsFragmentViewHolder>(options) {
@@ -121,12 +109,32 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
                     }
                 });
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                // String click_document_id = getRef(position).getKey();
+                                String url = model.getPdfurl();
+                                String receiverPdfID = getRef(position).getKey();
+
+                                Intent intent = new Intent(getActivity(), Pdf_view.class);
+                                intent.putExtra("pdfurl", url);
+                                intent.putExtra("receiverPdfID", receiverPdfID);
+                                startActivity(intent);
+                            }
+                        });
+
+                    }
+                });
 
                 if(fromUserID.equals(currentUserID)) {
                     holder.linearLayoutView.setVisibility(View.INVISIBLE);
                 }else {
                     holder.linearLayoutView.setVisibility(View.VISIBLE);
-                    displayNotification();
                 }
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +173,7 @@ public class NeedToSignDocumentosFragment extends Fragment {
         };
         receiver_documents_list.setAdapter(adapter);
         adapter.startListening();
+        /*************/
     }
 
     public static class NeedToSignDocumentsFragmentViewHolder extends RecyclerView.ViewHolder{
@@ -180,20 +189,5 @@ public class NeedToSignDocumentosFragment extends Fragment {
             linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
         }
     }
-    private void displayNotification(){
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
-                .setSmallIcon(R.mipmap.assinatura)
-                .setContentTitle("Novo Documento")
-                .setContentText("Recebeu um documento para assinatura")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
-        notificationManagerCompat.notify(1, mBuilder.build());
-
-
-
-    }
 }
