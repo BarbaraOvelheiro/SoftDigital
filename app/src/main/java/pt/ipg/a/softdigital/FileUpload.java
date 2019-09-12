@@ -41,9 +41,10 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Files"); // retorna um objeto do Firebase DataBase
     StorageReference storageReference =  FirebaseStorage.getInstance().getReference("Files"); // retorna um objeto  do Firebase Storage
+    DatabaseReference estadoDocumentos = FirebaseDatabase.getInstance().getReference().child("Estado dos documentos");
 
     FirebaseAuth mAuth;
-    private String currentUserID;
+    private String currentUserID, estado;
 
     ProgressDialog progressDialog;
 
@@ -67,6 +68,8 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
+
+        estado = "new";
 
     }
 
@@ -157,7 +160,7 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                         while (!uri.isComplete());
                         Uri url = uri.getResult();
 
-                        String messageSenderRef ="Files/" + currentUserID;
+                        final String messageSenderRef ="Files/" + currentUserID;
 
                         UploadPdf information = new UploadPdf(editPdfName.getText().toString(),url.toString(), currentUserID);
 
@@ -165,7 +168,18 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                                 .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(FileUpload.this,R.string.upload_file_success, Toast.LENGTH_SHORT).show();
+                                if(estado.equals("new")){
+                                    estadoDocumentos.child(currentUserID).child(databaseReference.push().getKey()).child("estado")
+                                            .setValue("Por assinar").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            Toast.makeText(FileUpload.this,R.string.upload_file_success, Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                                }
+
                             }
                         });
 
