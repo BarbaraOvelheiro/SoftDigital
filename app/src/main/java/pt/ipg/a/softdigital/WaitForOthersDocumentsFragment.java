@@ -1,6 +1,7 @@
 package pt.ipg.a.softdigital;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -90,6 +91,27 @@ public class WaitForOthersDocumentsFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                // String click_document_id = getRef(position).getKey();
+                                String url = model.getPdfurl();
+                                String receiverPdfID = getRef(position).getKey();
+
+                                Intent intent = new Intent(getActivity(), Pdf_view.class);
+                                intent.putExtra("pdfurl", url);
+                                intent.putExtra("receiverPdfID", receiverPdfID);
+                                startActivity(intent);
+                            }
+                        });
 
                     }
                 });
