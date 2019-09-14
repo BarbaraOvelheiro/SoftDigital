@@ -2,33 +2,43 @@ package pt.ipg.a.softdigital;
 
 public class UploadPdf {
 
-    public String name;
-    public String url;
-    public String from;
+    public String documentID;
+    public String documentName;
+    public String documentUrl;
+    public String userID;
 
     public UploadPdf()  {
 
     }
 
-    public UploadPdf(String name, String url, String from) {
-        this.name = name;
-        this.url = url;
-        this.from = from;
+    public UploadPdf(String documentID, String documentName, String documentUrl, String userID) {
+        this.documentID = documentID;
+        this.documentName = documentName;
+        this.documentUrl = documentUrl;
+        this.userID = userID;
     }
 
-    public String getName() {
-        return name;
+    public String getDocumentID() {
+        return documentID;
     }
 
-    public String getUrl() {
-        return url;
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
     }
 
-    public String getFrom() {
-        return from;
+    public String getDocumentName() {
+        return documentName;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public String getDocumentUrl() {
+        return documentUrl;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }
