@@ -10,17 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -31,7 +28,7 @@ public class AllDocumentsFragment extends Fragment {
     private View AllDocumentsView;
     private RecyclerView AllDocumentsList;
 
-    private DatabaseReference AllDocumentsRef;
+    private DatabaseReference FilesRef;
 
     FirebaseAuth mAuth;
     private String currentUserID;
@@ -51,7 +48,7 @@ public class AllDocumentsFragment extends Fragment {
         AllDocumentsList = (RecyclerView) AllDocumentsView.findViewById(R.id.all_documents_list);
         AllDocumentsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        AllDocumentsRef = FirebaseDatabase.getInstance().getReference().child("Files");
+        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files");
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -66,7 +63,7 @@ public class AllDocumentsFragment extends Fragment {
 
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<UploadPdf>()
-                .setQuery(AllDocumentsRef.child(currentUserID), UploadPdf.class)
+                .setQuery(FilesRef.child(currentUserID), UploadPdf.class)
                 .build();
 
         FirebaseRecyclerAdapter<UploadPdf, AllDocumentsViewHolder> adapter
@@ -74,7 +71,7 @@ public class AllDocumentsFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull final AllDocumentsViewHolder holder, final int position, @NonNull final UploadPdf model) {
 
-                holder.document_name_editText.setText(model.getName());
+                holder.document_receive_name_editText.setText(model.getDocumentName());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -85,7 +82,7 @@ public class AllDocumentsFragment extends Fragment {
                             public void onClick(View view) {
 
                                // String click_document_id = getRef(position).getKey();
-                                String url = model.getUrl();
+                                String url = model.getDocumentUrl();
                                 String receiverPdfID = getRef(position).getKey();
 
                                 Intent intent = new Intent(getActivity(), Pdf_view.class);
@@ -119,12 +116,17 @@ public class AllDocumentsFragment extends Fragment {
 
     public static class AllDocumentsViewHolder extends RecyclerView.ViewHolder{
 
-        TextView document_name_editText;
+        TextView document_receive_name_editText, send_userName_editText, fromtextView;
+        LinearLayout linearLayoutView;
+
 
         public AllDocumentsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            document_name_editText = itemView.findViewById(R.id.document_name_editText);
+            document_receive_name_editText = itemView.findViewById(R.id.document_receive_name_editText);
+            send_userName_editText = itemView.findViewById(R.id.send_userName_editText);
+            linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
+            fromtextView = itemView.findViewById(R.id.fromtextView);
         }
     }
 }

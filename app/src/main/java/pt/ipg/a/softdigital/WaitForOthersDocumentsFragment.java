@@ -117,37 +117,19 @@ public class WaitForOthersDocumentsFragment extends Fragment {
                 });
 
                 if(fromUserID.equals(currentUserID)) {
+                    holder.fromtextView.setVisibility(View.VISIBLE);
+                    holder.send_userName_editText.setVisibility(View.VISIBLE);
                     holder.linearLayoutView.setVisibility(View.VISIBLE);
                 }else {
                     holder.linearLayoutView.setVisibility(View.INVISIBLE);
                 }
-
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//
-//                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//
-//                                String url = model.getPdfurl();
-//                                Intent intent = new Intent(getActivity(), Pdf_view.class);
-//                                intent.putExtra("pdfurl",url);
-//                                startActivity(intent);
-//
-//
-//                            }
-//                        });
-//
-//                    }
-//                });
             }
 
             @NonNull
             @Override
             public WaitForOthersDocumentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.documents_receiver_layout, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.documents_display_layout, viewGroup, false);
                 WaitForOthersDocumentsViewHolder viewHolder = new WaitForOthersDocumentsViewHolder(view);
 
                 mAuth = FirebaseAuth.getInstance();
@@ -163,7 +145,7 @@ public class WaitForOthersDocumentsFragment extends Fragment {
 
     public static class WaitForOthersDocumentsViewHolder extends RecyclerView.ViewHolder{
 
-        TextView document_receive_name_editText, send_userName_editText;
+        TextView document_receive_name_editText, send_userName_editText, fromtextView;
         LinearLayout linearLayoutView;
 
         public WaitForOthersDocumentsViewHolder(@NonNull View itemView) {
@@ -172,6 +154,7 @@ public class WaitForOthersDocumentsFragment extends Fragment {
             document_receive_name_editText = itemView.findViewById(R.id.document_receive_name_editText);
             send_userName_editText = itemView.findViewById(R.id.send_userName_editText);
             linearLayoutView = itemView.findViewById(R.id.linearLayoutView);
+            fromtextView = itemView.findViewById(R.id.fromtextView);
         }
     }
 
