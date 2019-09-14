@@ -1,21 +1,13 @@
 package pt.ipg.a.softdigital;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,27 +20,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String messageReceiverID, messageSenderID;
-    private String pdfURL, receiverPdfID;
+    private String userReceiverID, currentUserID;
+    private String pdfURL, receiverPdfID, receiverStatusID;
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
     private DatabaseReference UserRef;
-    private DatabaseReference FilesRef;
+    private DatabaseReference FilesRef, documentStatus;
 
     private TextView contact_username_editText, document_name_editText;
     private Button send_pdf_to_receiver_button;
-
-    private String current_state;
-    private DatabaseReference DocumentsRequestRef;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +44,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         getSupportActionBar().setTitle(R.string.send_to_receiver);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        messageReceiverID = getIntent().getExtras().get("userIDs").toString();
-        Toast.makeText(this, "user ID" + messageReceiverID, Toast.LENGTH_SHORT).show();
+        userReceiverID = getIntent().getExtras().get("userIDs").toString();
+        Toast.makeText(this, "user ID" + userReceiverID, Toast.LENGTH_SHORT).show();
 
         pdfURL = getIntent().getExtras().get("pdfurl").toString();
         Toast.makeText(this, "Url pdf: " + pdfURL, Toast.LENGTH_SHORT).show();
@@ -67,13 +53,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
         Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
 
+        receiverStatusID = getIntent().getExtras().get("receiverStatusID").toString();
+        Log.v("MessageActivity", "receiverStatusID: " + receiverStatusID);
+
         mAuth = FirebaseAuth.getInstance();
-        messageSenderID = mAuth.getCurrentUser().getUid();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
         UserRef = FirebaseDatabase.getInstance().getReference().child("User");
-        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files").child(messageSenderID);
-
+        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files").child(currentUserID);
         RootRef = FirebaseDatabase.getInstance().getReference();
+        documentStatus = FirebaseDatabase.getInstance().getReference().child("Document Status");
 
         contact_username_editText = (TextView) findViewById(R.id.contact_username_editText);
         document_name_editText = (TextView) findViewById(R.id.document_name_editText);
@@ -86,16 +75,11 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
-
-        current_state = "new";
-
-        DocumentsRequestRef = FirebaseDatabase.getInstance().getReference().child("Documents Request");
-
     }
 
     private void RetrieveUserInfo(){
 
-        UserRef.child(messageReceiverID).addValueEventListener(new ValueEventListener() {
+        UserRef.child(userReceiverID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -121,9 +105,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
+                if((dataSnapshot.exists()) && (dataSnapshot.hasChild("documentName"))){
 
-                    String pdfName = dataSnapshot.child("name").getValue().toString();
+                    String pdfName = dataSnapshot.child("documentName").getValue().toString();
 
                     document_name_editText.setText(pdfName);
 
@@ -143,28 +127,48 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         String messageDocumentName = document_name_editText.getText().toString();
 
-//        String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
-//        String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
-        String messageSenderRef = "Messages/" + messageSenderID ;
-        String messageReceiverRef = "Messages/" + messageReceiverID ;
-
-//        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).child(messageReceiverRef).push();
+        final String messageSenderRef = "Messages/" + currentUserID;
+        final String messageReceiverRef = "Messages/" + userReceiverID;
 
         DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).push();
-
         String messagePushID = userMessageKeyRef.getKey();
 
-        if(current_state.equals("new")){
-            current_state = "pendent";
-        }
+        String statusIN = "e_necessario_assinar";
+        final String statusID = documentStatus.push().getKey();
+        DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, receiverPdfID);
+
+        documentStatus.child(userReceiverID).child(statusID)
+                    .setValue(infoStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Log.v("MessageActivity", "e_necessario_assinar inserido com sucesso");
+                    }
+
+                }
+                    });
+
+
+        String statusOP = "a_aguardar_por_outros";
+        DocumentStatus infStatus = new DocumentStatus(statusOP,receiverStatusID,receiverPdfID);
+
+        documentStatus.child(currentUserID).child(receiverStatusID).setValue(infStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Log.v("MessageActivity", "a_aguardar_por_outros inserido com sucesso");
+                    }
+                }
+            });
 
         Map messageText = new HashMap();
-        messageText.put("message", messageDocumentName);
-        messageText.put("pdfurl", pdfURL);
-        messageText.put("type", "text");
-        messageText.put("from", messageSenderID);
-        messageText.put("to", messageReceiverID);
-        messageText.put("current_state", current_state);
+        messageText.put("messageID", messagePushID);
+        messageText.put("documentName", messageDocumentName);
+        messageText.put("documentUrl", pdfURL);
+        messageText.put("userFromID", currentUserID);
+        messageText.put("userTOID", userReceiverID);
+        messageText.put("statusID", receiverStatusID);
+        messageText.put("documentID", receiverPdfID);
 
         Map messageDetails = new HashMap();
         messageDetails.put(messageSenderRef + "/" + messagePushID, messageText);

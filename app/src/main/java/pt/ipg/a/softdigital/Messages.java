@@ -2,58 +2,75 @@ package pt.ipg.a.softdigital;
 
 public class Messages {
 
-    private String message, pdfurl, type, from, to;
+    private String messageID, documentName, documentUrl, userFromID, userToID, statusID, documentID;
 
     public Messages(){
 
     }
 
-
-    public Messages(String message, String pdfurl, String type, String from, String to) {
-        this.message = message;
-        this.pdfurl = pdfurl;
-        this.type = type;
-        this.from = from;
-        this.to = to;
+    public Messages(String messageID, String documentName, String documentUrl, String userFromID, String userToID, String statusID, String documentID) {
+        this.messageID = messageID;
+        this.documentName = documentName;
+        this.documentUrl = documentUrl;
+        this.userFromID = userFromID;
+        this.userToID = userToID;
+        this.statusID = statusID;
+        this.documentID = documentID;
     }
 
-    public String getMessage() {
-        return message;
+    public String getDocumentName() {
+        return documentName;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getDocumentID() {
+        return documentID;
     }
 
-    public String getPdfurl() {
-        return pdfurl;
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
     }
 
-    public void setPdfurl(String pdfurl) {
-        this.pdfurl = pdfurl;
+    public String getStatusID() {
+        return statusID;
     }
 
-    public String getTo() {
-        return to;
+    public String getMessageID() {
+        return messageID;
     }
 
-    public void setTo(String receiver) {
-        this.to = to;
+    public void setMessageID(String messageID) {
+        this.messageID = messageID;
     }
 
-    public String getType() {
-        return type;
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
     }
 
-    public String getFrom() {
-        return from;
+    public String getDocumentUrl() {
+        return documentUrl;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setDocumentUrl(String documentUrl) {
+        this.documentUrl = documentUrl;
+    }
+
+    public String getUserToID() {
+        return userToID;
+    }
+
+    public void setUserToID(String receiver) {
+        this.userToID = userToID;
+    }
+
+    public String getUserFromID() {
+        return userFromID;
+    }
+
+    public void setUserFromID(String userFromID) {
+        this.userFromID = userFromID;
     }
 }

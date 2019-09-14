@@ -73,9 +73,9 @@ public class WaitForOthersDocumentsFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull final WaitForOthersDocumentsViewHolder holder, final int position, @NonNull final Messages model) {
 
-                String fromUserID = model.getFrom();
+                String fromUserID = model.getUserFromID();
 
-                holder.document_receive_name_editText.setText(model.getMessage());
+                holder.document_receive_name_editText.setText(model.getDocumentName());
 
                 UserRef = FirebaseDatabase.getInstance().getReference().child("User").child(fromUserID);
 
@@ -103,7 +103,7 @@ public class WaitForOthersDocumentsFragment extends Fragment {
                             public void onClick(View view) {
 
                                 // String click_document_id = getRef(position).getKey();
-                                String url = model.getPdfurl();
+                                String url = model.getDocumentUrl();
                                 String receiverPdfID = getRef(position).getKey();
 
                                 Intent intent = new Intent(getActivity(), Pdf_view.class);
