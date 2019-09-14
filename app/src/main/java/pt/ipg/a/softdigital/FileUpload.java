@@ -168,8 +168,9 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 String statusIN = "e_necessario_assinar";
+                                String messageID = null;
 
-                                DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, documentID);
+                                DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, documentID, currentUserID,messageID);
 
                                     documentStatus.child(currentUserID).child(statusID).setValue(infoStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

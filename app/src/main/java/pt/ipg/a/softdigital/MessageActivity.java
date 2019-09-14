@@ -135,7 +135,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         String statusIN = "e_necessario_assinar";
         final String statusID = documentStatus.push().getKey();
-        DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, receiverPdfID);
+        DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, receiverPdfID, userReceiverID, messagePushID);
 
         documentStatus.child(userReceiverID).child(statusID)
                     .setValue(infoStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -150,7 +150,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
 
         String statusOP = "a_aguardar_por_outros";
-        DocumentStatus infStatus = new DocumentStatus(statusOP,receiverStatusID,receiverPdfID);
+        DocumentStatus infStatus = new DocumentStatus(statusOP,receiverStatusID,receiverPdfID,currentUserID, messagePushID);
 
         documentStatus.child(currentUserID).child(receiverStatusID).setValue(infStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
