@@ -127,10 +127,10 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         String messageDocumentName = document_name_editText.getText().toString();
 
-        final String messageSenderRef = "Messages/" + currentUserID;
-        final String messageReceiverRef = "Messages/" + userReceiverID;
+        final String messageSenderRef = "Messages/";
+        final String messageReceiverRef = "Messages/";
 
-        DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messageSenderRef).push();
+        DatabaseReference userMessageKeyRef = RootRef.child("Messages").push();
         String messagePushID = userMessageKeyRef.getKey();
 
         String statusIN = "e_necessario_assinar";
