@@ -128,7 +128,6 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         String messageDocumentName = document_name_editText.getText().toString();
 
         final String messageSenderRef = "Messages/";
-        final String messageReceiverRef = "Messages/";
 
         DatabaseReference userMessageKeyRef = RootRef.child("Messages").push();
         String messagePushID = userMessageKeyRef.getKey();
@@ -172,7 +171,6 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         Map messageDetails = new HashMap();
         messageDetails.put(messageSenderRef + "/" + messagePushID, messageText);
-        messageDetails.put(messageReceiverRef + "/" + messagePushID, messageText);
 
         RootRef.updateChildren(messageDetails).addOnCompleteListener(new OnCompleteListener() {
             @Override
