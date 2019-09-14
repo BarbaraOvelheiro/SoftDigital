@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class Pdf_view extends AppCompatActivity {
 
     PDFView mPDFView;
     private String pdfURL;
-    private String receiverPdfID;
+    private String receiverPdfID, receiverStatusID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class Pdf_view extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.sign);
+
+        receiverStatusID = getIntent().getExtras().get("receiverStatusID").toString();
+        Log.v("Pdf_View", "receiverStatusID: " + receiverStatusID);
 
         receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
         Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
@@ -89,7 +93,7 @@ public class Pdf_view extends AppCompatActivity {
 
 
         if(item.getItemId() == R.id.sign_menu_icon){
-            Intent intent = new Intent(this, DigitalSignature.class);
+            Intent intent = new Intent(this, PaintActivity.class);
             startActivity(intent);
 
         }
@@ -98,12 +102,12 @@ public class Pdf_view extends AppCompatActivity {
             Intent intent = new Intent(this, ViewContacts.class);
             intent.putExtra("pdfurl", pdfURL);
             intent.putExtra("receiverPdfID", receiverPdfID);
+            intent.putExtra("receiverStatusID", receiverStatusID);
             startActivity(intent);
 
         }
         if(item.getItemId() == R.id.add_signature_field_menu_icon){
-            Intent intent = new Intent(this, PaintActivity.class);
-            startActivity(intent);
+
         }
 
         return true;

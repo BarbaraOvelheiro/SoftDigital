@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,8 +28,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-
 public class FileUpload extends AppCompatActivity implements View.OnClickListener{
 
     private TextView notification;
@@ -39,12 +36,12 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
     Uri pdfUri;
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Files"); // retorna um objeto do Firebase DataBase
+    DatabaseReference FilesRef = FirebaseDatabase.getInstance().getReference().child("Files"); // retorna um objeto do Firebase DataBase
     StorageReference storageReference =  FirebaseStorage.getInstance().getReference("Files"); // retorna um objeto  do Firebase Storage
-    DatabaseReference estadoDocumentos = FirebaseDatabase.getInstance().getReference().child("Estado dos documentos");
+    DatabaseReference documentStatus = FirebaseDatabase.getInstance().getReference().child("Document Status");
 
     FirebaseAuth mAuth;
-    private String currentUserID, estado;
+    private String currentUserID;
 
     ProgressDialog progressDialog;
 
@@ -69,7 +66,6 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
-        estado = "new";
 
     }
 
@@ -161,24 +157,30 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                         Uri url = uri.getResult();
 
                         final String messageSenderRef ="Files/" + currentUserID;
+                        final String documentID = FilesRef.push().getKey();
+                        final String statusID = documentStatus.push().getKey();
 
-                        UploadPdf information = new UploadPdf(editPdfName.getText().toString(),url.toString(), currentUserID);
+                        UploadPdf information = new UploadPdf(documentID,editPdfName.getText().toString(),url.toString(), currentUserID, statusID);
 
-                        FirebaseDatabase.getInstance().getReference().child(messageSenderRef).child(databaseReference.push().getKey())
+                        FirebaseDatabase.getInstance().getReference().child(messageSenderRef).child(documentID)
                                 .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(estado.equals("new")){
-                                    estadoDocumentos.child(currentUserID).child(databaseReference.push().getKey()).child("estado")
-                                            .setValue("Por assinar").addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                String statusIN = "e_necessario_assinar";
+
+                                DocumentStatus infoStatus = new DocumentStatus(statusIN, statusID, documentID);
+
+                                    documentStatus.child(currentUserID).child(statusID).setValue(infoStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()) {
 
-                                            Toast.makeText(FileUpload.this,R.string.upload_file_success, Toast.LENGTH_SHORT).show();
-
+                                                Toast.makeText(FileUpload.this, R.string.upload_file_success, Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     });
-                                }
+
 
                             }
                         });

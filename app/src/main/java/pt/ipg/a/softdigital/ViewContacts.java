@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ public class ViewContacts extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUserID;
     private String pdfURL;
-    private String receiverPdfID;
+    private String receiverPdfID, receiverStatusID;
 
 
     @Override
@@ -55,6 +56,9 @@ public class ViewContacts extends AppCompatActivity {
 
         receiverPdfID = getIntent().getExtras().get("receiverPdfID").toString();
         Toast.makeText(this, "Pdf ID: " + receiverPdfID, Toast.LENGTH_SHORT).show();
+
+        receiverStatusID = getIntent().getExtras().get("receiverStatusID").toString();
+        Log.v("ViewContacts", "receiverStatusID: " + receiverStatusID);
 
     }
 
@@ -103,6 +107,7 @@ public class ViewContacts extends AppCompatActivity {
                                         intent.putExtra("userIDs", userIDs);
                                         intent.putExtra("pdfurl", pdfURL);
                                         intent.putExtra("receiverPdfID", receiverPdfID);
+                                        intent.putExtra("receiverStatusID", receiverStatusID);
                                         startActivity(intent);
 
                                     }
