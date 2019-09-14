@@ -106,8 +106,8 @@ public class NeedToSignDocumentosFragment extends Fragment {
 
                     if (messageID == null) {
 
-                        String documentName = model.getDocumentID();
-                        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files").child(currentUserID).child(documentName);
+                        final String documentID = model.getDocumentID();
+                        FilesRef = FirebaseDatabase.getInstance().getReference().child("Files").child(currentUserID).child(documentID);
                         FilesRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,12 +125,11 @@ public class NeedToSignDocumentosFragment extends Fragment {
                                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    String receiverPdfID = getRef(position).getKey();
                                                     String receiverStatusID = model.getStatusID();
 
                                                     Intent intent = new Intent(getActivity(), Pdf_view.class);
                                                     intent.putExtra("pdfurl", url);
-                                                    intent.putExtra("receiverPdfID", receiverPdfID);
+                                                    intent.putExtra("receiverPdfID", documentID);
                                                     intent.putExtra("receiverStatusID", receiverStatusID);
                                                     startActivity(intent);
                                                 }
@@ -193,12 +192,12 @@ public class NeedToSignDocumentosFragment extends Fragment {
                                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    String receiverPdfID = getRef(position).getKey();
+                                                    final String documentID = model.getDocumentID();
                                                     String receiverStatusID = model.getStatusID();
 
                                                     Intent intent = new Intent(getActivity(), Pdf_view.class);
                                                     intent.putExtra("pdfurl", url);
-                                                    intent.putExtra("receiverPdfID", receiverPdfID);
+                                                    intent.putExtra("receiverPdfID", documentID);
                                                     intent.putExtra("receiverStatusID", receiverStatusID);
                                                     startActivity(intent);
                                                 }
