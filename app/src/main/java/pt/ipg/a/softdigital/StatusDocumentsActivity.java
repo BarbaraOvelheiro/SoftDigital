@@ -8,6 +8,14 @@ import android.os.Bundle;
 import android.widget.Toolbar;
 
 public class StatusDocumentsActivity extends AppCompatActivity {
+    /**
+     * Método que executa o programa
+     * public = É visto em qualquer lugar da aplicação. É o modificador de acesso
+     * static = é iniciado automaticamente pela JVM, sem precisar de uma instância
+     * void = Método sem retorno (retorno vazio)
+     * main = Nome do método, que é obrigatório ser este. Recebe como parâmetro um array de String.
+     * String[] args = Array de argumentos que podem ser repassados na chamada do programa.
+     **/
 
     TabLayout tabLayout;
     TabItem AllDocuments_TabItem;
