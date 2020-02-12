@@ -10,7 +10,7 @@
     <string name="all_documents">All documents</string>
     <string name="auth_failed">Autentication failed</string>
     <string name="clear">Clear</string>
-    <string name="click_select_file">Click to select file</string>
+    <string name="click_select_file">Click to select document</string>
     <string name="contact_request">Contact request</string>
     <string name="done">Done</string>
     <string name="email_verification_failed">Email verification failed</string>
@@ -51,8 +51,8 @@
     <string name="select_file">Select document</string>
     <string name="select_file_permissiondenied">Please, set up documents permission</string>
     <string name="selected_file">Selected document</string>
-    <string name="send_to">Send to:</string>
-    <string name="send_to_receiver">Sendo to receiver:</string>
+    <string name="send_to">Sender:</string>
+    <string name="send_to_receiver">Send to recipient:</string>
     <string name="settings">Settings</string>
     <string name="sign">Sign document</string>
     <string name="sign_and_send">Sign and send</string>
@@ -61,11 +61,11 @@
     <string name="sucessful_add_contact">Sucessfull add contact</string>
     <string name="sucessful_send_message">Sucessfull send message</string>
     <string name="undo">Undo</string>
-    <string name="upload_file">Insert document</string>
     <string name="upload_file_failed">Upload document failed</string>
     <string name="upload_file_success">Upload document sucess</string>
     <string name="uploading_file">Uploading document...</string>
-    <string name="waiting_for_others_signatures">Waiting for other documents.</string>
+    <string name="waiting_for_others_signatures">Waiting for other</string>
     <string name="waiting_signature_from">Waiting signature from:</string>
-    <string name="waiting_for_signature">Waiting for other documents.</string>
+    <string name="waiting_for_signature">"Waiting for other "</string>
+    <string name="upload_file">Upload document</string>
 </resources>
