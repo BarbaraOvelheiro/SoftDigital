@@ -175,13 +175,13 @@ public class AllDocumentsFragment extends Fragment {
                 if (status.equals("e_necessario_assinar")){
                     holder.fromtextView.setVisibility(View.VISIBLE);
                     holder.send_userName_editText.setVisibility(View.VISIBLE);
-                    holder.fromtextView.setText("Estado: ");
-                    holder.send_userName_editText.setText("é necessário assinar");
+                    holder.fromtextView.setText(R.string.status_file);
+                    holder.send_userName_editText.setText(R.string.for_signing);
                 }else if(status.equals("a_aguardar_por_outros")){
                     holder.fromtextView.setVisibility(View.VISIBLE);
                     holder.send_userName_editText.setVisibility(View.VISIBLE);
-                    holder.fromtextView.setText("Estado: ");
-                    holder.send_userName_editText.setText("a aguardar por outros");
+                    holder.fromtextView.setText(R.string.status_file);
+                    holder.send_userName_editText.setText(R.string.waiting_for_signature);
                 }
 
             }

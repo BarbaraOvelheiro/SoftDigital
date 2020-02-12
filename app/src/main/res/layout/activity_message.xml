@@ -21,7 +21,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Para:"
+                android:text="@string/to"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documento:"
+                android:text="@string/file"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
 

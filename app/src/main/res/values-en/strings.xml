@@ -68,4 +68,7 @@
     <string name="waiting_signature_from">Waiting signature from:</string>
     <string name="waiting_for_signature">"Waiting for other "</string>
     <string name="upload_file">Upload document</string>
+    <string name="to">To:</string>
+    <string name="file">Document</string>
+    <string name="status_file">Status:</string>
 </resources>
