@@ -57,6 +57,7 @@
     <string name="waiting_signature_from">Aguarda assinatura de: </string>
     <string name="signature_pendent">Documento para assinatura pendente</string>
     <string name="status_file">Estado:</string>
+    <string name="new_file">"Novo Documento"</string>
 
     <string name="send_to_receiver">Enviar para destinatário</string>
     <string name="sign">Assinar documento</string>
