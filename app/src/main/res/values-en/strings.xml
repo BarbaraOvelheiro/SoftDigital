@@ -28,10 +28,10 @@
     <string name="fingerPrint_notsupport">Your device doesn\'t support FingerPrint</string>
     <string name="fingerPrint_permissiondenied">Please, set up FingerPrint permission</string>
     <string name="fingerPrint_sucess">Sucess FingerPrint</string>
-    <string name="for_signing">It is need to sign</string>
-    <string name="have_account">You have got am account?</string>
+    <string name="for_signing">Needs to sign</string>
+    <string name="have_account">You have got an account?</string>
     <string name="loading">Loading</string>
-    <string name="necessary_sign">It is need to sign</string>
+    <string name="necessary_sign">Needs to sign</string>
     <string name="no_add_signature">No signature</string>
     <string name="no_file_select">No selected documents</string>
     <string name="nothing_to_redo">Nothing to redo</string>
