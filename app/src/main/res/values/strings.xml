@@ -70,6 +70,7 @@
     <string name="contact_request">Pedido de Contacto</string>
     <string name="request_accept">Aceitar</string>
     <string name="sucessful_add_contact">Contacto adicionado com sucesso</string>
+    <string name="contacts">Contactos</string>
 
     <string name="add_signature">Adicionar assinatura</string>
     <string name="no_add_signature">Sem assinatura</string>
